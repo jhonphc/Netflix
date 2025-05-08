@@ -48,7 +48,7 @@ function displayBanner(items, containerId) {
       container.innerHTML = '';
       items.forEach(item => {
         const img = document.createElement('banner');
-       // banner.src = `${IMG_URL}${item.poster_path}`;
+       banner.src = `${IMG_URL}${item.poster_path}`;
         banner.alt = item.title || item.name;
         banner.onclick = () => showDetails(item);
         container.appendChild(img);
