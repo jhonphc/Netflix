@@ -39,6 +39,7 @@ const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
         img.src = `${IMG_URL}${item.poster_path}`;
         img.alt = item.title || item.name;
         img.onclick = () => showDetails(item);
+          banner.onclick = () => showDetails(item);
         container.appendChild(img);
       });
     }
