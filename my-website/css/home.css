@@ -21,7 +21,9 @@
       align-items: center;
       padding: 20px;
     }
-   .jf {color: red;}
+   .jf h1 {
+       color: red;
+          }
     .banner h1 {
       background: rgba(0,0,0,0.7);
       padding: 10px;
