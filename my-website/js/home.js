@@ -43,17 +43,7 @@ const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
       });
     }
 
-function displayBanner(items, containerId) {
-      const container = document.getElementById(containerId);
-      container.innerHTML = '';
-      items.forEach(item => {
-        const img = document.createElement('banner');
-       banner.src = `${IMG_URL}${item.poster_path}`;
-        banner.alt = item.title || item.name;
-        banner.onclick = () => showDetails(item);
-        container.appendChild(img);
-      });
-    }
+
 
     function showDetails(item) {
       currentItem = item;
