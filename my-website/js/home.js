@@ -476,6 +476,11 @@ async function updateAllContent() {
   displayList(movies, 'movies-list');
   displayList(tvShows, 'tvshows-list');
   displayList(anime, 'anime-list');
+
+  const animeYear = document.getElementById('anime-year-select').value;
+const anime = await fetchAnime(animeYear);
+displayList(anime, 'anime-list');
+
 }
 
 function setupFilters() {
@@ -484,6 +489,10 @@ function setupFilters() {
 
   document.getElementById('movie-year-select').addEventListener('change', updateAllContent);
   document.getElementById('tvshow-year-select').addEventListener('change', updateAllContent);
+
+  populateYearOptions('anime-year-select');
+document.getElementById('anime-year-select').addEventListener('change', updateAllContent);
+
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
