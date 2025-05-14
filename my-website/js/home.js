@@ -3,7 +3,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/original';
 let currentItem;
 
-// Fetch trending movies with a year filter (if available)
+// Fetch trending movies, apply year filter if selected
 async function fetchTrendingMovies(year = 'all') {
   const url = year === 'all'
     ? `${BASE_URL}/trending/movie/week?api_key=${API_KEY}` // No year filter
@@ -12,15 +12,15 @@ async function fetchTrendingMovies(year = 'all') {
   try {
     const res = await fetch(url);
     const data = await res.json();
-    console.log("Fetched movies:", data);  // Log the fetched movies data for debugging
+    console.log("Fetched movies:", data.results);  // Log the results for debugging
     return data.results;
   } catch (error) {
     console.error("Error fetching movies:", error);
-    return [];  // Return empty array in case of error
+    return [];
   }
 }
 
-// Fetch trending TV shows with a year filter (if available)
+// Fetch trending TV shows, apply year filter if selected
 async function fetchTrendingTVShows(year = 'all') {
   const url = year === 'all'
     ? `${BASE_URL}/trending/tv/week?api_key=${API_KEY}` // No year filter
@@ -29,15 +29,15 @@ async function fetchTrendingTVShows(year = 'all') {
   try {
     const res = await fetch(url);
     const data = await res.json();
-    console.log("Fetched TV shows:", data);  // Log the fetched TV shows data for debugging
+    console.log("Fetched TV shows:", data.results);  // Log the results for debugging
     return data.results;
   } catch (error) {
     console.error("Error fetching TV shows:", error);
-    return [];  // Return empty array in case of error
+    return [];
   }
 }
 
-// Fetch trending anime (TV shows in Japanese with genre ID for anime) with a year filter (if available)
+// Fetch trending anime, apply year filter if selected
 async function fetchTrendingAnime(year = 'all') {
   let allResults = [];
   for (let page = 1; page <= 3; page++) {
@@ -97,4 +97,76 @@ function showDetails(item) {
   currentItem = item;
   document.getElementById('modal-title').textContent = item.title || item.name;
   document.getElementById('modal-description').textContent = item.overview;
-  document.getElementById('modal-image').src = `${IMG_URL}${item.p_
+  document.getElementById('modal-image').src = `${IMG_URL}${item.poster_path}`;
+  document.getElementById('modal-rating').innerHTML = '★'.repeat(Math.round(item.vote_average / 2));
+  changeServer();
+  document.getElementById('modal').style.display = 'flex';
+}
+
+// Change video server
+function changeServer() {
+  const server = document.getElementById('server').value;
+  const type = currentItem.media_type === "movie" ? "movie" : "tv";
+  let embedURL = "";
+
+  if (server === "vidsrc.cc") {
+    embedURL = `https://vidsrc.cc/v2/embed/${type}/${currentItem.id}`;
+  } else if (server === "vidsrc.me") {
+    embedURL = `https://vidsrc.net/embed/${type}/?tmdb=${currentItem.id}`;
+  } else if (server === "player.videasy.net") {
+    embedURL = `https://player.videasy.net/${type}/${currentItem.id}`;
+  }
+
+  document.getElementById('modal-video').src = embedURL;
+}
+
+// Close modal
+function closeModal() {
+  document.getElementById('modal').style.display = 'none';
+  document.getElementById('modal-video').src = '';
+}
+
+// Initialize page
+async function init() {
+  const movies = await fetchTrendingMovies();
+  const tvShows = await fetchTrendingTVShows();
+  const anime = await fetchTrendingAnime();
+
+  // Check if movies, tv shows, and anime are loaded correctly
+  console.log("Movies:", movies);
+  console.log("TV Shows:", tvShows);
+  console.log("Anime:", anime);
+
+  displayBanner(movies[Math.floor(Math.random() * movies.length)]);
+  displayList(movies, 'movies-list');
+  displayList(tvShows, 'tvshows-list');
+  displayList(anime, 'anime-list');
+
+  populateYearSelect();  // Populate year select dropdowns
+}
+
+init();
+
+// Handle year selection change for movies
+document.getElementById('movie-year-select').addEventListener('change', async (e) => {
+  const selectedYear = e.target.value;
+  console.log("Selected Movie Year:", selectedYear); // Log the selected year
+  const movies = await fetchTrendingMovies(selectedYear);
+  displayList(movies, 'movies-list');
+});
+
+// Handle year selection change for TV shows
+document.getElementById('tvshow-year-select').addEventListener('change', async (e) => {
+  const selectedYear = e.target.value;
+  console.log("Selected TV Show Year:", selectedYear); // Log the selected year
+  const tvShows = await fetchTrendingTVShows(selectedYear);
+  displayList(tvShows, 'tvshows-list');
+});
+
+// Handle year selection change for anime
+document.getElementById('anime-year-select').addEventListener('change', async (e) => {
+  const selectedYear = e.target.value;
+  console.log("Selected Anime Year:", selectedYear); // Log the selected year
+  const anime = await fetchTrendingAnime(selectedYear);
+  displayList(anime, 'anime-list');
+});
