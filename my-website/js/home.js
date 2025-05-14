@@ -3,7 +3,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/original';
 let currentItem;
 
-// Fetch trending movies with optional year filter
+// Fetch trending movies with an optional year filter
 async function fetchTrending(type, year = 'all') {
   let url = `${BASE_URL}/trending/${type}/week?api_key=${API_KEY}`;
   if (year !== 'all') {
@@ -32,46 +32,36 @@ async function fetchTrendingAnime(year = 'all') {
   return allResults;
 }
 
-// Function to generate year options in the dropdowns
+// Function to generate year options in the dropdown
 function populateYearSelect() {
-  const yearSelects = document.querySelectorAll('.filter select');
+  const yearSelect = document.getElementById('year-select');
   const currentYear = new Date().getFullYear();
   for (let year = currentYear; year >= 2000; year--) {
     const option = document.createElement('option');
     option.value = year;
     option.textContent = year;
-    yearSelects.forEach(select => select.appendChild(option.cloneNode(true)));
+    yearSelect.appendChild(option);
   }
 }
 
-// Handle year selection change for movies
-document.getElementById('movie-year-select').addEventListener('change', async (e) => {
+// Function to handle year selection change
+document.getElementById('year-select').addEventListener('change', async (e) => {
   const selectedYear = e.target.value;
   const movies = await fetchTrending('movie', selectedYear);
-  displayList(movies, 'movies-list');
-});
-
-// Handle year selection change for TV shows
-document.getElementById('tvshow-year-select').addEventListener('change', async (e) => {
-  const selectedYear = e.target.value;
   const tvShows = await fetchTrending('tv', selectedYear);
-  displayList(tvShows, 'tvshows-list');
-});
-
-// Handle year selection change for anime
-document.getElementById('anime-year-select').addEventListener('change', async (e) => {
-  const selectedYear = e.target.value;
   const anime = await fetchTrendingAnime(selectedYear);
+
+  // Re-display the lists with filtered content
+  displayList(movies, 'movies-list');
+  displayList(tvShows, 'tvshows-list');
   displayList(anime, 'anime-list');
 });
 
-// Display banner
 function displayBanner(item) {
   document.getElementById('banner').style.backgroundImage = `url(${IMG_URL}${item.backdrop_path})`;
   document.getElementById('banner-title').textContent = item.title || item.name;
 }
 
-// Display list of items (movies, tv shows, or anime)
 function displayList(items, containerId) {
   const container = document.getElementById(containerId);
   container.innerHTML = '';
@@ -79,4 +69,23 @@ function displayList(items, containerId) {
     const img = document.createElement('img');
     img.src = `${IMG_URL}${item.poster_path}`;
     img.alt = item.title || item.name;
-    img.onclick = () => showDetails(item
+    img.onclick = () => showDetails(item);
+    container.appendChild(img);
+  });
+}
+
+async function init() {
+  // Populate the year filter dropdown
+  populateYearSelect();
+
+  const movies = await fetchTrending('movie');
+  const tvShows = await fetchTrending('tv');
+  const anime = await fetchTrendingAnime();
+
+  displayBanner(movies[Math.floor(Math.random() * movies.length)]);
+  displayList(movies, 'movies-list');
+  displayList(tvShows, 'tvshows-list');
+  displayList(anime, 'anime-list');
+}
+
+init();
