@@ -201,15 +201,15 @@ async function fetchDiscover(type, year) {
   return data.results;
 }
 
-async function fetchAnime(year) {
-  let url = `${BASE_URL}/discover/tv?api_key=${API_KEY}&sort_by=popularity.desc&with_original_language=ja&with_genres=16`;
-  if (year !== 'all') {
-    url += `&first_air_date_year=${year}`;
-  }
-  const res = await fetch(url);
-  const data = await res.json();
-  return data.results;
-}
+// async function fetchAnime(year) {
+//   let url = `${BASE_URL}/discover/tv?api_key=${API_KEY}&sort_by=popularity.desc&with_original_language=ja&with_genres=16`;
+//   if (year !== 'all') {
+//     url += `&first_air_date_year=${year}`;
+//   }
+//   const res = await fetch(url);
+//   const data = await res.json();
+//   return data.results;
+// }
   
 // async function fetchAnime(year) {
 //   let url = `${BASE_URL}/discover/tv?api_key=${API_KEY}&sort_by=popularity.desc&with_original_language=ja&with_genres=16`;
@@ -333,7 +333,7 @@ async function updateAllContent() {
 function setupFilters() {
   populateYearOptions('movie-year-select');
   populateYearOptions('tvshow-year-select');
-populateYearOptions('anime-year-select');
+  populateYearOptions('anime-year-select');
   document.getElementById('movie-year-select').addEventListener('change', updateAllContent);
   document.getElementById('tvshow-year-select').addEventListener('change', updateAllContent);
   document.getElementById('anime-year-select').addEventListener('change', updateAllContent);
