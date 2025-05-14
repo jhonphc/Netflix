@@ -172,7 +172,7 @@ document.getElementById('anime-year-select').addEventListener('change', async (e
 }); */
 
 
-/*const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
+const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/original';
 
@@ -323,10 +323,10 @@ async function init() {
   };
 }
 
-init(); */
+init();
 
 
-const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
+/*const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/original';
 let currentItem;
