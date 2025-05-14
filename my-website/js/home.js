@@ -226,8 +226,8 @@ async function fetchAnime(year) {
 //     media_type: 'tv'
 //   }));
 
-  return withMediaType;
-}
+//   return withMediaType;
+// }
 
 
 function displayList(items, containerId) {
