@@ -467,7 +467,8 @@ async function searchTMDB() {
 async function updateAllContent() {
   const movieYear = document.getElementById('movie-year-select').value;
   const tvYear = document.getElementById('tvshow-year-select').value;
-
+  const animeYear = document.getElementById('anime-year-select').value;
+  
   const movies = await fetchDiscover('movie', movieYear);
   const tvShows = await fetchDiscover('tv', tvYear);
   const anime = await fetchAnime(tvYear);
@@ -477,7 +478,7 @@ async function updateAllContent() {
   displayList(tvShows, 'tvshows-list');
   displayList(anime, 'anime-list');
 
-  const animeYear = document.getElementById('anime-year-select').value;
+  
 const anime = await fetchAnime(animeYear);
 displayList(anime, 'anime-list');
 
@@ -486,11 +487,11 @@ displayList(anime, 'anime-list');
 function setupFilters() {
   populateYearOptions('movie-year-select');
   populateYearOptions('tvshow-year-select');
-
+populateYearOptions('anime-year-select');
   document.getElementById('movie-year-select').addEventListener('change', updateAllContent);
   document.getElementById('tvshow-year-select').addEventListener('change', updateAllContent);
 
-  populateYearOptions('anime-year-select');
+  
 document.getElementById('anime-year-select').addEventListener('change', updateAllContent);
 
 }
