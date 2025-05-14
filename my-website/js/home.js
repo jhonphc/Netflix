@@ -328,10 +328,6 @@ async function updateAllContent() {
   displayList(tvShows, 'tvshows-list');
   displayList(anime, 'anime-list');
 
-  
-const anime = await fetchAnime(animeYear);
-displayList(anime, 'anime-list');
-
 }
 
 function setupFilters() {
@@ -340,9 +336,7 @@ function setupFilters() {
 populateYearOptions('anime-year-select');
   document.getElementById('movie-year-select').addEventListener('change', updateAllContent);
   document.getElementById('tvshow-year-select').addEventListener('change', updateAllContent);
-
-  
-document.getElementById('anime-year-select').addEventListener('change', updateAllContent);
+  document.getElementById('anime-year-select').addEventListener('change', updateAllContent);
 
 }
 
