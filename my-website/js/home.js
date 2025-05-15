@@ -1,4 +1,4 @@
-const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
+/* const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/original';
 let currentItem;
@@ -169,13 +169,13 @@ document.getElementById('anime-year-select').addEventListener('change', async (e
   console.log("Selected Anime Year:", selectedYear); // Log the selected year
   const anime = await fetchTrendingAnime(selectedYear);
   displayList(anime, 'anime-list');
-});
+}); */
 
 
 
 
 
-/*const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
+const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/original';
 let currentItem;
