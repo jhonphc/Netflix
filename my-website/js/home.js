@@ -190,7 +190,7 @@ function populateYearOptions(selectId) {
   }
 }
 
-async function fetchDiscover(type, year) {
+/*async function fetchDiscover(type, year) {
   let url = `${BASE_URL}/discover/${type}?api_key=${API_KEY}&sort_by=popularity.desc`;
   if (year !== 'all') {
     const yearParam = type === 'movie' ? 'primary_release_year' : 'first_air_date_year';
@@ -209,25 +209,25 @@ async function fetchAnime(year) {
   const res = await fetch(url);
   const data = await res.json();
   return data.results;
-}
+}*/
   
-// async function fetchAnime(year) {
-//   let url = `${BASE_URL}/discover/tv?api_key=${API_KEY}&sort_by=popularity.desc&with_original_language=ja&with_genres=16`;
-//   if (year !== 'all') {
-//     url += `&first_air_date_year=${year}`;
-//   }
+ async function fetchAnime(year) {
+   let url = `${BASE_URL}/discover/tv?api_key=${API_KEY}&sort_by=popularity.desc&with_original_language=ja&with_genres=16`;
+   if (year !== 'all') {
+     url += `&first_air_date_year=${year}`;
+   }
 
-//   const res = await fetch(url);
-//   const data = await res.json();
+   const res = await fetch(url);
+   const data = await res.json();
 
-//   // Set media_type manually so it works with showDetails and changeServer
-//   const withMediaType = data.results.map(item => ({
-//     ...item,
-//     media_type: 'tv'
-//   }));
+   // Set media_type manually so it works with showDetails and changeServer
+   const withMediaType = data.results.map(item => ({
+     ...item,
+     media_type: 'tv'
+   }));
 
-//   return withMediaType;
-// }
+  return withMediaType;
+}
 
 
 function displayList(items, containerId) {
