@@ -6,6 +6,13 @@ let currentItem;
 const currentYear = new Date().getFullYear();
 const startYear = 2000;
 
+
+function toggleMenu() {
+  const menu = document.getElementById('nav-links');
+  menu.classList.toggle('show');
+}
+
+
 //Temporary change code for filter placeholder below
 /*function populateYearSelect(selectId) {
   const select = document.getElementById(selectId);
@@ -21,6 +28,7 @@ const startYear = 2000;
     select.appendChild(option);
   }
 }*/
+
 
 function populateYearSelect(selectId, minYear = 2000) {
   const select = document.getElementById(selectId);
