@@ -6,7 +6,7 @@ let currentItem;
 const currentYear = new Date().getFullYear();
 const startYear = 2000;
 
-function populateYearSelect(selectId) {
+/*function populateYearSelect(selectId) {
   const select = document.getElementById(selectId);
   const allOption = document.createElement('option');
   allOption.value = 'all';
@@ -19,7 +19,28 @@ function populateYearSelect(selectId) {
     option.textContent = y;
     select.appendChild(option);
   }
+}*/
+
+function populateYearSelect(selectId, minYear = 2000) {
+  const select = document.getElementById(selectId);
+  select.innerHTML = ''; // Clear existing options
+
+  const allYearsOption = document.createElement('option');
+  allYearsOption.value = 'all';
+  allYearsOption.textContent = 'All Years';
+  allYearsOption.disabled = false;
+  allYearsOption.selected = true; // Make it appear as a placeholder
+  select.appendChild(allYearsOption);
+
+  const currentYear = new Date().getFullYear();
+  for (let year = currentYear; year >= minYear; year--) {
+    const option = document.createElement('option');
+    option.value = year;
+    option.textContent = year;
+    select.appendChild(option);
+  }
 }
+
 
 async function fetchTrending(type) {
   const res = await fetch(`${BASE_URL}/trending/${type}/week?api_key=${API_KEY}`);
@@ -189,3 +210,7 @@ document.getElementById('anime-year-select').addEventListener('change', async (e
 });
 
 init();
+
+populateYearSelect('movie-year-select');
+populateYearSelect('tvshow-year-select');
+populateYearSelect('anime-year-select');
