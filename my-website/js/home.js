@@ -100,7 +100,9 @@ async function fetchAnimeByYear(year) {
 function displayBanner(item) {
   document.getElementById('banner').style.backgroundImage = `url(${IMG_URL}${item.backdrop_path})`;
   document.getElementById('banner-title').textContent = item.title || item.name;
-  img.onclick = () => showDetails(item);
+  
+  banner.onclick = () => showDetails(item);
+  container.appendChild(banner);
 }
 
 
