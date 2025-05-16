@@ -106,7 +106,14 @@ function displayBanner(item) {
 const banner = document.getElementById('banner');
 banner.style.backgroundImage = url(${IMG_URL}${item.backdrop_path});
 document.getElementById('banner-title').textContent = item.title || item.name;
-banner.onclick = () => showDetails(item); // Make it clickable
+//banner.onclick = () => showDetails(item); // Make it clickable
+  items.forEach(item => {
+    const img = document.createElement('img');
+    img.src = `${IMG_URL}${item.backdrop_path}`;
+    img.alt = item.title || item.name;
+    img.onclick = () => showDetails(item);
+    container.appendChild(img);
+  });
 }
 
 
