@@ -3,7 +3,7 @@
 
     .navbar {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 10px; background: #000;
+      padding: 10px; background: #222;
     }
 
     .navbar img { height: 40px; }
@@ -23,11 +23,7 @@
     }
     .jf {
   color: #ff0000;
-    }
-
-   .banner {
-    cursor: pointer;
-    }
+}
 
     .banner h1 {
       background: rgba(0,0,0,0.7);
@@ -160,11 +156,7 @@
       font-size: 30px;
     }
 
-
-
-
 /* MOBILE DISPLAY START */
-
 @media (max-width: 768px) {
   .navbar {
     flex-direction: row;
