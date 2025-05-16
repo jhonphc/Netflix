@@ -159,44 +159,13 @@
       right: 30px;
       font-size: 30px;
     }
-/* Hide hamburger by default */
 
-
-/* Responsive behavior */
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background-color: #222;
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    width: 80%;
-    padding: 10px;
-    z-index: 20;
-    border-radius: 8px;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .nav-links a,
-  .nav-links input {
-    width: 100%;
-    margin: 5px 0;
-  }
-}
 
 
 
 /* MOBILE DISPLAY START */
 
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   .navbar {
     flex-direction: row;
     align-items: flex-start;
@@ -207,7 +176,7 @@
     width: 100%;
     gap: 10px;
     margin-top: 10px;
-  } */
+  }
 
   .nav-links a, .search-bar {
     width: 100%;
