@@ -220,7 +220,7 @@
 
 /* MOBILE DISPLAY START */
 
-/@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .navbar {
     flex-direction: row;
     align-items: flex-start;
@@ -231,7 +231,7 @@
     width: 100%;
     gap: 10px;
     margin-top: 10px;
-  }
+  } */
 
   .nav-links a, .search-bar {
     width: 100%;
