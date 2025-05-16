@@ -46,7 +46,7 @@ async function fetchMoviesByYear(year) {
     : `${BASE_URL}/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&primary_release_year=${year}`;
   const res = await fetch(url);
   const data = await res.json();
-  return data.results;
+  return data.results.map(item => ({ ...item, media_type: 'movie' }));
 }
 
 async function fetchTVByYear(year) {
@@ -55,7 +55,7 @@ async function fetchTVByYear(year) {
     : `${BASE_URL}/discover/tv?api_key=${API_KEY}&sort_by=popularity.desc&first_air_date_year=${year}`;
   const res = await fetch(url);
   const data = await res.json();
-  return data.results;
+  return data.results.map(item => ({ ...item, media_type: 'tv' }));
 }
 
 async function fetchAnimeByYear(year) {
@@ -66,13 +66,14 @@ async function fetchAnimeByYear(year) {
       : `${BASE_URL}/discover/tv?api_key=${API_KEY}&with_original_language=ja&with_genres=16&sort_by=popularity.desc&first_air_date_year=${year}&page=${page}`;
     const res = await fetch(url);
     const data = await res.json();
-    const filtered = data.results.filter(item =>
-      item.original_language === 'ja' && item.genre_ids.includes(16)
-    );
+    const filtered = data.results
+      .filter(item => item.original_language === 'ja' && item.genre_ids.includes(16))
+      .map(item => ({ ...item, media_type: 'tv' }));
     allResults = allResults.concat(filtered);
   }
   return allResults;
 }
+
 
 function displayBanner(item) {
   document.getElementById('banner').style.backgroundImage = `url(${IMG_URL}${item.backdrop_path})`;
