@@ -159,10 +159,7 @@
       right: 30px;
       font-size: 30px;
     }
-
-/* MOBILE DISPLAY START */
-
-/* Hamburger menu button */
+/* Hide hamburger by default */
 .hamburger {
   display: none;
   background: none;
@@ -172,6 +169,7 @@
   cursor: pointer;
 }
 
+/* Responsive behavior */
 @media (max-width: 768px) {
   .hamburger {
     display: block;
@@ -201,9 +199,30 @@
   }
 }
 
+/* Always show nav on desktop */
+@media (min-width: 769px) {
+  .nav-links {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    background: none;
+    padding: 0;
+    width: auto;
+  }
+
+  .nav-links a,
+  .nav-links input {
+    width: auto;
+    margin: 0 10px;
+  }
+}
+
+
+/* MOBILE DISPLAY START */
+
 /*--------------------------------------*/
 
-@media (max-width: 768px) {
+/@media (max-width: 768px) {
   .navbar {
     flex-direction: row;
     align-items: flex-start;
