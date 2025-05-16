@@ -6,6 +6,7 @@ let currentItem;
 const currentYear = new Date().getFullYear();
 const startYear = 2000;
 
+//Temporary change code for filter placeholder below
 /*function populateYearSelect(selectId) {
   const select = document.getElementById(selectId);
   const allOption = document.createElement('option');
@@ -95,11 +96,19 @@ async function fetchAnimeByYear(year) {
   return allResults;
 }
 
-
-function displayBanner(item) {
+// change to make it clickable
+/*function displayBanner(item) {
   document.getElementById('banner').style.backgroundImage = `url(${IMG_URL}${item.backdrop_path})`;
   document.getElementById('banner-title').textContent = item.title || item.name;
+}*/
+
+function displayBanner(item) {
+const banner = document.getElementById('banner');
+banner.style.backgroundImage = url(${IMG_URL}${item.backdrop_path});
+document.getElementById('banner-title').textContent = item.title || item.name;
+banner.onclick = () => showDetails(item); // Make it clickable
 }
+
 
 function displayList(items, containerId) {
   const container = document.getElementById(containerId);
