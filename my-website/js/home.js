@@ -98,16 +98,21 @@ async function fetchAnimeByYear(year) {
 
 
 function displayBanner(item) {
-  
-  const banner = document.getElementById('banner');
-
   document.getElementById('banner').style.backgroundImage = `url(${IMG_URL}${item.backdrop_path})`;
   document.getElementById('banner-title').textContent = item.title || item.name;
   
-  banner.onclick = () => showDetails(item);
+  banner.onclick = () => showDetails2(item);
   container.appendChild(banner);
 }
-
+function showDetails2(item) {
+  currentItem = item;
+  document.getElementById('modal-title').textContent = item.title || item.name;
+  document.getElementById('modal-description').textContent = item.overview;
+  document.getElementById('modal-image').src = `${IMG_URL}${item.poster_path}`;
+  document.getElementById('modal-rating').innerHTML = '★'.repeat(Math.round(item.vote_average / 2));
+  changeServer();
+  document.getElementById('modal').style.display = 'flex';
+}
 
 
 function displayList(items, containerId) {
