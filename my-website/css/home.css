@@ -23,7 +23,11 @@
     }
     .jf {
   color: #ff0000;
-}
+    }
+
+    .banner {
+    cursor: pointer;
+    }
 
     .banner h1 {
       background: rgba(0,0,0,0.7);
