@@ -99,9 +99,9 @@ async function fetchAnimeByYear(year) {
 }
 
 
-function toggleMenu() {
-  document.getElementById('nav-links').classList.toggle('show');
-}
+// function toggleMenu() {
+//   document.getElementById('nav-links').classList.toggle('show');
+// }
 
 function toggleSearchBar() {
   const searchBar = document.getElementById('search-bar');
