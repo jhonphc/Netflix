@@ -42,12 +42,16 @@
   </button>
   <div class="nav-links" id="nav-links">
     
-    <!-- Navbar links (inside .nav-links) -->
-<a href="#">Home</a>
+    <a href="#">Home</a>
 <button class="search-toggle" onclick="toggleSearchBar()" aria-label="Search">
   <i class="fas fa-search"></i>
 </button>
-<input type="text" id="search-bar" class="search-bar hidden" placeholder="Search..." oninput="searchTMDB()" />
+<input
+  type="text"
+  id="search-bar"
+  class="search-bar hidden"
+  placeholder="Search for movies or shows..."
+  oninput="searchTMDB()" />
 
   </div>
 </div>
