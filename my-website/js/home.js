@@ -186,21 +186,24 @@ function openSearchModal() {
   document.getElementById('search-input').focus();
 
   //Hide mobile navbar if open
-  const navLinks = document.querySelector('.nav-links');
-  if (navLinks.classList.contains('open')) {
-    navLinks.classList.remove('open');
-  }
+  // const navLinks = document.querySelector('.nav-links');
+  // if (navLinks.classList.contains('open')) {
+  //   navLinks.classList.remove('open');
+  // }
 
 }
+
+document.getElementById('hamburger').addEventListener('click', function () {
+  document.querySelector('.nav-links').classList.toggle('open');
+});
+
 document.getElementById('search-input').addEventListener('input', () => {
   const navLinks = document.querySelector('.nav-links');
   if (window.innerWidth <= 768 && navLinks.classList.contains('open')) {
     navLinks.classList.remove('open');
   }
 });
-document.getElementById('hamburger').addEventListener('click', function () {
-  document.querySelector('.nav-links').classList.toggle('open');
-});
+
 
 
 function closeSearchModal() {
