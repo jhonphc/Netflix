@@ -18,10 +18,6 @@
   padding: 5px;
 }
 
-/* Hide the search bar initially */
-/* .search-bar.hidden {
-  display: none;
-} */
 
 /* Mobile alignment */
 @media (max-width: 768px) {
