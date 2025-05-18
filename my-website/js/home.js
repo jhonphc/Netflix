@@ -185,23 +185,13 @@ function openSearchModal() {
   document.getElementById('search-modal').style.display = 'flex';
   document.getElementById('search-input').focus();
 
-  // Hide mobile navbar if open
-  // const navLinks = document.querySelector('.nav-links');
-  // if (navLinks.classList.contains('open')) {
-  //   navLinks.classList.remove('open');
-  // }
-
-}
-document.getElementById('search-input').addEventListener('input', () => {
+  Hide mobile navbar if open
   const navLinks = document.querySelector('.nav-links');
-  if (window.innerWidth <= 768 && navLinks.classList.contains('open')) {
+  if (navLinks.classList.contains('open')) {
     navLinks.classList.remove('open');
   }
-});
-document.getElementById('hamburger').addEventListener('click', function () {
-  document.querySelector('.nav-links').classList.toggle('open');
-});
 
+}
 
 function closeSearchModal() {
   document.getElementById('search-modal').style.display = 'none';
