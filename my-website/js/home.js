@@ -6,24 +6,6 @@ let currentItem;
 const currentYear = new Date().getFullYear();
 const startYear = 2000;
 
-
-//Temporary change code for filter placeholder below
-/*function populateYearSelect(selectId) {
-  const select = document.getElementById(selectId);
-  const allOption = document.createElement('option');
-  allOption.value = 'all';
-  allOption.textContent = 'All Years';
-  select.appendChild(allOption);
-
-  for (let y = currentYear; y >= startYear; y--) {
-    const option = document.createElement('option');
-    option.value = y;
-    option.textContent = y;
-    select.appendChild(option);
-  }
-}*/
-
-
 function populateYearSelect(selectId, minYear = 2000) {
   const select = document.getElementById(selectId);
   select.innerHTML = ''; // Clear existing options
