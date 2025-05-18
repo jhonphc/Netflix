@@ -185,7 +185,7 @@ function openSearchModal() {
   document.getElementById('search-modal').style.display = 'flex';
   document.getElementById('search-input').focus();
 
-  Hide mobile navbar if open
+  //Hide mobile navbar if open
   const navLinks = document.querySelector('.nav-links');
   if (navLinks.classList.contains('open')) {
     navLinks.classList.remove('open');
