@@ -43,16 +43,17 @@
   <div class="nav-links" id="nav-links">
     
     <a href="#">Home</a>
-<button class="search-toggle" onclick="toggleSearchBar()" aria-label="Search">
+<button class="search-toggle" onclick="toggleSearchBar()" onfocus="openSearchModal()"
+  oninput="searchTMDB()" aria-label="Search">
   <i class="fas fa-search"></i>
 </button>
-<input
+<!-- <input
   type="text"
   id="search-bar"
   class="search-bar hidden"
   placeholder="Search for movies or shows..."
   onfocus="openSearchModal()"
-  oninput="searchTMDB()" />
+  oninput="searchTMDB()" /> -->
 
   </div>
 </div>
