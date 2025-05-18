@@ -45,6 +45,10 @@
   }
 }
 
+.search-modal {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+}
 
 
 /* search icon code end */
