@@ -163,15 +163,41 @@ function closeModal() {
   document.getElementById('modal-video').src = '';
 }
 
+// function openSearchModal() {
+//   document.getElementById('search-modal').style.display = 'flex';
+//   document.getElementById('search-input').focus();
+// }
+
+// function closeSearchModal() {
+//   document.getElementById('search-modal').style.display = 'none';
+//   document.getElementById('search-results').innerHTML = '';
+// }
+
+// search modal start
+// ESC key closes modal
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    closeSearchModal();
+  }
+});
+
 function openSearchModal() {
   document.getElementById('search-modal').style.display = 'flex';
   document.getElementById('search-input').focus();
+
+  // Hide mobile navbar if open
+  const navLinks = document.querySelector('.nav-links');
+  if (navLinks.classList.contains('open')) {
+    navLinks.classList.remove('open');
+  }
 }
 
 function closeSearchModal() {
   document.getElementById('search-modal').style.display = 'none';
   document.getElementById('search-results').innerHTML = '';
 }
+
+// search modal end
 
 async function searchTMDB() {
   const query = document.getElementById('search-input').value;
