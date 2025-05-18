@@ -98,6 +98,10 @@ async function fetchAnimeByYear(year) {
   return allResults;
 }
 
+function toggleMenu() {
+  document.getElementById('nav-links').classList.toggle('show');
+}
+
 
 function displayBanner(item) {
   document.getElementById('banner').style.backgroundImage = `url(${IMG_URL}${item.backdrop_path})`;
