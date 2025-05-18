@@ -8,7 +8,13 @@
 
 /* search icon code start */
 
-.search-icon {
+/* Hide input initially */
+.search-bar.hidden {
+  display: none;
+}
+
+/* Adjust appearance of search icon */
+.search-toggle {
   background: none;
   border: none;
   color: white;
@@ -17,25 +23,27 @@
   padding: 5px;
 }
 
+/* Align nav-links vertically on mobile */
 @media (max-width: 768px) {
-  .search-bar {
-    display: none;
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 
-  .search-icon {
-    display: block;
+  .nav-links a,
+  .search-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .search-bar {
+    width: 90%;
   }
 }
 
-@media (min-width: 769px) {
-  .search-icon {
-    display: none;
-  }
-
-  .search-bar {
-    display: block;
-  }
-}
 
 /* search icon code end */
 
