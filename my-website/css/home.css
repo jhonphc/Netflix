@@ -6,6 +6,39 @@
       padding: 10px; background: #000;
     }
 
+/* search icon code start */
+
+.search-icon {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+@media (max-width: 768px) {
+  .search-bar {
+    display: none;
+  }
+
+  .search-icon {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .search-icon {
+    display: none;
+  }
+
+  .search-bar {
+    display: block;
+  }
+}
+
+/* search icon code end */
+
     .navbar img { height: 40px; }
     .nav-links { display: flex; align-items: center; gap: 10px; }
     .nav-links a { color: white; text-decoration: none; margin: 0 5px; }
