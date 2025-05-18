@@ -98,8 +98,17 @@ async function fetchAnimeByYear(year) {
   return allResults;
 }
 
+
 function toggleMenu() {
   document.getElementById('nav-links').classList.toggle('show');
+}
+
+function toggleSearchBar() {
+  const searchBar = document.getElementById('search-bar');
+  searchBar.classList.toggle('hidden');
+  if (!searchBar.classList.contains('hidden')) {
+    searchBar.focus();
+  }
 }
 
 
