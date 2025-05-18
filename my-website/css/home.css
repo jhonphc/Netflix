@@ -8,12 +8,7 @@
 
 /* search icon code start */
 
-/* Hide input initially */
-.search-bar.hidden {
-  display: none;
-}
-
-/* Adjust appearance of search icon */
+/* Search icon button */
 .search-toggle {
   background: none;
   border: none;
@@ -23,12 +18,17 @@
   padding: 5px;
 }
 
-/* Align nav-links vertically on mobile */
+/* Hide the search bar initially */
+.search-bar.hidden {
+  display: none;
+}
+
+/* Mobile alignment */
 @media (max-width: 768px) {
   .nav-links {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    width: 100%;
   }
 
   .nav-links a,
@@ -41,8 +41,10 @@
 
   .search-bar {
     width: 90%;
+    margin-top: 5px;
   }
 }
+
 
 
 /* search icon code end */
