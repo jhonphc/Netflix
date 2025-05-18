@@ -43,6 +43,10 @@
     width: 90%;
     margin-top: 5px;
   }
+
+    .nav-links.open {
+    display: flex;
+  }
 }
 
 .search-modal {
