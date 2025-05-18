@@ -8,6 +8,9 @@
   <link rel="preload" href="js/home.js" as="script">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  
   <script defer src="js/home.js"></script>
 
  <script type="text/javascript" data-cfasync="false">
@@ -23,14 +26,31 @@
 
 <body>
   
-  <div class="navbar">
+<!--   <div class="navbar">
     <h1 class="jf" href="index.html" >JhonFlix</h1>
     <div class="nav-links">
       <a href="index.html"><b>Home</b></a>
       <input type="text" class="search-bar" placeholder="Search..." onfocus="openSearchModal()" oninput="searchTMDB()" />
 
     </div>
+  </div> -->
+
+  <div class="navbar">
+  <h1 class="jf">JhonFlix</h1>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+    <i class="fas fa-bars"></i>
+  </button>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html"><b>Home</b></a>
+    <input
+      type="text"
+      class="search-bar"
+      placeholder="Search..."
+      onfocus="openSearchModal()"
+      oninput="searchTMDB()"
+    />
   </div>
+</div>
 
 
   <div class="banner" id="banner">
