@@ -46,8 +46,8 @@
 }
 
 .search-modal {
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px); /* Safari support */
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px); /* Safari support */
 }
 
 
