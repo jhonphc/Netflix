@@ -245,18 +245,18 @@
   const totalRows = videoData.length;
   const totalpages = Math.ceil(totalRows / itemsPerPage);
 
-//   function createThumbnail(video) {
-//       const thumbnail = document.createElement('div');
-//       thumbnail.className = 'thumbnail';
-//       thumbnail.style.width = '150px';
-//       thumbnail.style.height = '250px';
-//       thumbnail.innerHTML = `
-//           <img src="${video.thumbnail}" alt="${video.title}">
-//           <h2>${video.title}</h2>
-//       `;
-//       thumbnail.onclick = () => goToWatch(video.id);
-//       return thumbnail;
-//   }
+  function createThumbnail(video) {
+      const thumbnail = document.createElement('div');
+      thumbnail.className = 'thumbnail';
+      thumbnail.style.width = '150px';
+      thumbnail.style.height = '250px';
+      thumbnail.innerHTML = `
+          <img src="${video.thumbnail}" alt="${video.title}">
+          <h2>${video.title}</h2>
+      `;
+      thumbnail.onclick = () => goToWatch(video.id);
+      return thumbnail;
+  }
 
   function goToWatch(videoId) {
       window.location.href = `main.html?video=${videoId}`;
