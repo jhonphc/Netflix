@@ -1,0 +1,379 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JhonFlix</title>
+  <link rel="icon" href="https://i.ibb.co/Y48NzZ0z/favicon.png"  type="image/png">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="preload" href="css/home.css" as="style">
+  <link rel="preload" href="js/home.js" as="script">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  
+  <!-- Inlined CSS START-->
+  <style>
+    /* body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #000000;
+        color: white;
+        padding: 15px 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo {
+        width: 60px;
+        height: auto;
+        margin-right: 15px;
+    }
+
+    .header-left h1 {
+        margin: 0;
+        font-size: 1.8em;
+    }
+
+    .header-right input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1em;
+        background-color: #f8f8f8;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f0f0f0;
+        padding: 15px;
+        margin-bottom: 20px;
+        font-size: 1.2em;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-link a {
+        text-decoration: none;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    } */
+
+    main {
+        padding: 20px;
+    }
+
+    .video-thumbnails {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        justify-items: center;
+    }
+
+    .thumbnail {
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .thumbnail:hover {
+        transform: scale(1.05);
+    }
+
+    .thumbnail img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: cover;
+    }
+
+    .thumbnail h2 {
+        margin: 10px 0 0 0;
+        color: #330416;
+        font-size: 14px;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .pagination-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .pagination-controls button {
+        padding: 10px 15px;
+        margin: 0 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f0f0f0;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .pagination-controls button:hover {
+        background-color: #e0e0e0;
+    }
+
+    .pagination-controls button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+</style>
+  <!-- Inlined CSS END -->
+
+
+
+  <script defer src="js/home.js"></script>
+
+ <script type="text/javascript" data-cfasync="false">
+/*<![CDATA[/* */
+(function(){var w=window,r="f63f4ef53171b9fb7293ca64512f1e44",o=[["siteId",928*251-138+4966642],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],d=["d3d3LmFudGlhZGJsb2Nrc3lzdGVtcy5jb20vZXRyYWNraW5nLW1pbi5jc3M=","ZDNjb2Q4MHRobjdxbmQuY2xvdWRmcm9udC5uZXQvdVhXbWlzL3ZhbWkubWluLmpz"],s=-1,y,j,t=function(){clearTimeout(j);s++;if(d[s]&&!(1773487135000<(new Date).getTime()&&1<s)){y=w.document.createElement("script");y.type="text/javascript";y.async=!0;var u=w.document.getElementsByTagName("script")[0];y.src="https://"+atob(d[s]);y.crossOrigin="anonymous";y.onerror=t;y.onload=function(){clearTimeout(j);w[r.slice(0,16)+r.slice(0,16)]||t()};j=setTimeout(t,5E3);u.parentNode.insertBefore(y,u)}};if(!w[r]){try{Object.freeze(w[r]=o)}catch(e){}t()}})();
+/*]]>/* */
+</script>
+
+
+
+
+</head>
+
+<body>
+<!-- Start Navigation Bar -->
+  <div class="navbar">
+  <h1 class="jf"><a href="index.html">JhonFlix</a></h1>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+    <i class="fas fa-bars"></i>
+  </button>
+  <div class="nav-links" id="nav-links">
+    <a href="index.html"><b>Home</b></a>
+    <a href="#"><b>18+</b></a>
+<button class="search-toggle" onclick="toggleSearchBar()" onfocus="openSearchModal()"
+  oninput="searchTMDB()" aria-label="Search">
+  <i class="fas fa-search"></i>
+</button>
+  </div>
+</div>
+<!-- End Navigation Bar -->
+
+<!-- Content start -->
+
+<main>
+  <div class="video-thumbnails" id="video-thumbnails">
+      <!-- Thumbnails will be dynamically added here -->
+  </div>
+</main>
+
+<div class="pagination-controls" id="pagination-controls">
+  <button onclick="changePage(currentPage - 1)" id="prev-button" disabled>Previous</button>
+  <span id="page-info">Page 1 of 1</span>
+  <button onclick="changePage(currentPage + 1)" id="next-button" disabled>Next</button>
+</div>
+
+<script>
+  const videoData = [
+      { id: 'walker', title: 'Walker', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/6/8/2/1205682-walker-2025-0-1000-0-1500-crop.jpg?v=92123f9e6f' },
+      { id: 'pilya', title: 'Pilya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/3/1/9/4/7/1231947-pilya-2024-0-1000-0-1500-crop.jpg?v=7cd1e6b8ff' },
+      { id: 'paluwagan', title: 'Paluwagan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/3/1205703-paluwagan-0-1000-0-1500-crop.jpg?v=58fc0d756c' },
+      { id: 'privatetutor', title: 'Private Tutor', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/2/1205702-private-tutor-0-1000-0-1500-crop.jpg?v=5c49f502f6' },
+      { id: 'backrider', title: 'Back Rider', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/9/4/3/1/8/1194318-backrider-0-1000-0-1500-crop.jpg?v=6e3d0d5def' },
+      { id: 'pantasyanitami', title: 'Pantasya Ni Tami', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/0/9/8/9/8/1109898-pantasya-ni-tami-0-1000-0-1500-crop.jpg?v=30a2ab684b' },
+      { id: 'jowacollector', title: 'The Jowa Collector', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/4/6/9/8/7/1346987-the-jowa-collector-0-1000-0-1500-crop.jpg?v=375f64cf4a' },
+      { id: 'tayuan', title: 'Tayuan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/1/5/7/0/9/1015709-tayuan-0-1000-0-1500-crop.jpg?v=e967fdd7a8' },
+      { id: 'sabik', title: 'Sabik', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/4/3/1/3/0/1343130-sabik-2025-0-1000-0-1500-crop.jpg?v=e4f2c58ae9' },
+      { id: 'puriforrent', title: 'Puri For Rent', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/2/7/6/6/7/1327667-puri-for-rent-0-1000-0-1500-crop.jpg?v=9178778b27' },
+      { id: 'kasalo', title: 'Kasalo', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/2/7/6/9/6/1127696-kasalo-0-1000-0-1500-crop.jpg?v=13df49acd5' },
+      { id: 'init', title: 'Init', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/4/0/0/5/1184005-init-0-1000-0-1500-crop.jpg?v=5187191788' },
+      { id: 'hiraya', title: 'Hiraya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/7/1/8/0/1187180-hiraya-0-1000-0-1500-crop.jpg?v=8873735ba7' },
+      { id: 'fbuddies', title: 'F-Buddies', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/0/1205700-f-buddies-0-1000-0-1500-crop.jpg?v=aac1b45e10' },
+      { id: 'cita', title: 'Cita', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/4/0/2/5/1184025-cita-0-1000-0-1500-crop.jpg?v=59f2833780' },
+      { id: 'deepinside', title: 'Deep Inside Angeli Khang', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/4/3/1/2/0/1343120-deep-inside-angeli-khang-0-1000-0-1500-crop.jpg?v=18ff5a4418' },
+      { id: 'cheaters', title: 'Cheaters', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/4/0/6/9/9/1140699-cheaters-0-1000-0-1500-crop.jpg?v=3102e5bfe0' },
+      { id: 'throuple', title: 'Throuple', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/2/6/7/0/1202670-throuple-2024-1-0-1000-0-1500-crop.jpg?v=1fe4e2146a' },
+      { id: 'ungol', title: 'Ungol', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/6/6/4/6/6/1266466-ungol-0-1000-0-1500-crop.jpg?v=966da6f751' },
+      { id: 'ladyguard', title: 'Lady Guard', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/5/0/8/5/1/1150851-lady-guard-0-1000-0-1500-crop.jpg?v=3b9b69f1b8' },
+      { id: 'kaulayaw', title: 'Kaulayaw', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/4/0/0/3/1184003-kaulayaw-0-1000-0-1500-crop.jpg?v=05a43aabe2' },
+      { id: 'kaskasero', title: 'Kaskasero', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/4/0/0/4/1184004-kaskasero-2024-0-1000-0-1500-crop.jpg?v=383f147f94' },
+      { id: 'dirtyicecream', title: 'Dirty Ice Cream', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/6/4/2/9/6/1164296-dirty-ice-cream-0-1000-0-1500-crop.jpg?v=145aed3cf7' },
+      { id: 'dayo', title: 'Dayo', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/4/6/8/8/2/1146882-dayo-2024-0-1000-0-1500-crop.jpg?v=0eba7a5aa7' },
+      { id: 'daddysitter', title: 'Daddy Sitter', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/9/4/2/5/7/1194257-daddysitter-0-1000-0-1500-crop.jpg?v=11c753122a' },
+      { id: 'balinsasayaw', title: 'Balinsasayaw', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/5/0/8/3/2/1150832-balinsasayaw-0-1000-0-1500-crop.jpg?v=70d60659ef' },
+      { id: 'pinya', title: 'Pin/Ya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/6/6/0/8/5/1266085-pin-ya-0-1000-0-1500-crop.jpg?v=d4156999e4' },
+      { id: 'litsoneras', title: 'Litsoneras', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/2/3/5/1/9/1023519-litsoneras-0-1000-0-1500-crop.jpg?v=097c8989a3' },
+      { id: 'isanggabi', title: 'Isang Gabi', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/6/1/2/7/4/1161274-isang-gabi-0-1000-0-1500-crop.jpg?v=a45d2d093c' },
+      { id: 'hugot', title: 'Hugot', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/0/7/0/8/3/1007083-hugot-0-1000-0-1500-crop.jpg?v=cd01924259' },
+      { id: 'hosto', title: 'Hosto', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/1/5/7/1/2/1015712-hosto-0-1000-0-1500-crop.jpg?v=65804d9137' },
+      { id: 'hilom', title: 'Hilom', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/1/5/7/0/3/1015703-hilom-0-1000-0-1500-crop.jpg?v=8531e780bd' },
+      { id: 'hibang', title: 'Hibang', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/9/8/9/1/2/1098912-hibang-0-1000-0-1500-crop.jpg?v=6fac343515' },
+      { id: 'haslers', title: 'Haslers', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/8/2/0/0/7/1082007-haslers-0-1000-0-1500-crop.jpg?v=247f46b7d7' },
+      { id: 'gantiganti', title: 'Ganti-Ganti', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/8/7/8/7/2/1087872-ganti-ganti-0-1000-0-1500-crop.jpg?v=bdae18c594' },
+      { id: 'elevator', title: 'Elevator', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/5/3/1/0/1/1153101-elevator-0-1000-0-1500-crop.jpg?v=3734d4664d' },
+      { id: 'bisyo', title: 'Bisyo!', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/2/6/2/3/1/1026231-bisyo--0-1000-0-1500-crop.jpg?v=8a0ba5d630' },
+      { id: 'bedspacer', title: 'Bed Spacer', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/9/4/1/4/8/1094148-bedspacer-0-1000-0-1500-crop.jpg?v=8a2b98bdc1' },
+      { id: 'afam', title: 'Afam', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/0/3/9/7/7/1003977-afam-0-1000-0-1500-crop.jpg?v=828d6a2d03' },
+      { id: 'salawahan', title: 'Salawahan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/0/5/1/8/6/1105186-salawahan-0-1000-0-1500-crop.jpg?v=ceeddff7eb' },
+      { id: 'sandwich', title: 'SandWich', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/6/9/5/2/9/969529-sandwich-0-1000-0-1500-crop.jpg?v=577a5087bf' },
+      { id: 'salakab', title: 'Salakab', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/8/1/9/9/2/1081992-salakab-0-1000-0-1500-crop.jpg?v=790046cc00' },
+      { id: 'higop', title: 'Higop', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/8/9/8/3/2/1089832-higop-0-1000-0-1500-crop.jpg?v=a24a5a06d5' },
+      { id: 'sexgames', title: 'Sex Games', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/9/5/3/8/8/995388-sex-games-0-1000-0-1500-crop.jpg?v=7c402516db' },
+      { id: 'baliktaya', title: 'Balik Taya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/7/5/3/5/9/975359-balik-taya-0-1000-0-1500-crop.jpg?v=08db44871a' },
+      { id: 'belaluna', title: 'Bela Luna', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/6/0/1/1/7/960117-bela-luna-0-1000-0-1500-crop.jpg?v=5f698decaa' },
+      { id: 'laquerida', title: 'La Querida', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/6/9/5/7/5/969575-la-querida-0-1000-0-1500-crop.jpg?v=a0016bf322' },
+      { id: 'bosodos', title: 'Boso Dos', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/6/9/5/7/8/969578-boso-dos-0-1000-0-1500-crop.jpg?v=73af07aa47' },
+      { id: 'lawa', title: 'Lawa', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/7/0/6/0/8/970608-lawa-0-1000-0-1500-crop.jpg?v=da1718c56d' },
+      { id: 'paupahan', title: 'Paupahan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/8/7/2/7/7/987277-paupahan-0-1000-0-1500-crop.jpg?v=85f2a67bde' },
+      { id: 'salamatdaks', title: 'Salamat Daks', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/7/7/6/9/5/977695-botox-beauty-0-1000-0-1500-crop.jpg?v=ac1a5fafed' },
+      { id: 'sapul', title: 'Sapul', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/9/1/0/1/0/991010-sapul-0-1000-0-1500-crop.jpg?v=55bd91ec49' },
+      { id: 'stardancer', title: 'Star Dancer', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/6/0/1/2/0/960120-star-dancers-0-1000-0-1500-crop.jpg?v=3859af9856' },
+      { id: 'suki', title: 'Suki', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/6/9/5/6/5/969565-suki-0-1000-0-1500-crop.jpg?v=df2ae681c0' },
+      { id: 'alapaap', title: 'Alapaap', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/3/9/7/4/0/939740-alapaap-0-1000-0-1500-crop.jpg?v=0f6f01a8e3' },
+      { id: 'anaffairtoforget', title: 'An Affair To Forget', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/5/5/9/2/4/955924-an-affair-to-forget-0-1000-0-1500-crop.jpg?v=e697f8b76a' },
+      { id: 'bugso', title: 'Bugso', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/5/0/3/6/5/950365-bugso-0-1000-0-1500-crop.jpg?v=8db153379d' },
+      { id: 'karakrus', title: 'Kara Krus', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/3/5/4/0/5/935405-kara-krus-0-1000-0-1500-crop.jpg?v=4a97eab183' },
+      { id: 'laruan', title: 'Laruan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/4/4/9/3/8/944938-laruan-2022-0-1000-0-1500-crop.jpg?v=d152ab01a1' },
+      { id: 'nightbird', title: 'Nightbird', thumbnail: 'https://pbs.twimg.com/media/FmWjvANXwAMlFrb.jpg' },
+      { id: 'pamasahe', title: 'Pamasahe', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/3/9/7/3/5/939735-pamasahe-0-1000-0-1500-crop.jpg?v=c2a5165748' },
+      { id: 'panibugho', title: 'Panibugho', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/5/5/9/2/5/955925-panibugho-0-1000-0-1500-crop.jpg?v=17460e4313' },
+      { id: 'batapasisabel', title: 'Bata Pa Si Sabel', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/4/3/3/0/8/943308-bata-pa-si-sabel-0-1000-0-1500-crop.jpg?v=bd250d1f26' },
+      { id: 'showroom', title: 'Show Room', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/3/2/6/5/3/932653-showroom-0-1000-0-1500-crop.jpg?v=a2da7e6b44' },
+      { id: 'taginit', title: 'Tag-Init', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/6/5/0/4/9/965049-summer-0-1000-0-1500-crop.jpg?v=a3fab4106d' },
+      { id: 'selinasgold', title: 'Selina Gold', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/2/7/8/9/5/927895-selina-s-gold-0-1000-0-1500-crop.jpg?v=1a0bff76c4' },
+      { id: 'usxher', title: 'Us X Her', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/3/9/7/3/7/939737-us-x-her-0-1000-0-1500-crop.jpg?v=af3e8320d6' },
+      { id: 'domme', title: 'Domme', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/8/3/9/8/3/983983-domme-0-1000-0-1500-crop.jpg?v=6d84e9135c' },
+      { id: 'ikawlangangmahal', title: 'Ikaw Lang Ang Mahal', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/7/1/4/5/9/871459-ikaw-lang-ang-mahal-0-1000-0-1500-crop.jpg?v=84b7e92420' },
+      { id: 'pabuya', title: 'Pabuya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/2/1/8/9/9/921899-pabuya-0-1000-0-1500-crop.jpg?v=8e234269f6' },
+      { id: 'pusoy', title: 'Pusoy', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/7/9/5/7/9/879579-pusoy-0-1000-0-1500-crop.jpg?v=ec2ec638ff' },
+      { id: 'relyebo', title: 'Relyebo', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/2/5/8/8/3/925883-relyebo-0-1000-0-1500-crop.jpg?v=67b54200e6' },
+      { id: 'babaengnawawalasasarili', title: 'Ang Babaeng Nawawala Sa Sarili', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/9/1/8/6/9/891869-ang-babaeng-nawawala-sa-sarili-0-1000-0-1500-crop.jpg?v=9c99a0735c' },
+      { id: 'putahe', title: 'Putahe', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/7/6/7/3/8/876738-putahe-0-1000-0-1500-crop.jpg?v=3777dc950e' },
+      { id: 'kaliwaan', title: 'Kaliwaan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/6/1/5/6/9/861569-kaliwaan-0-1000-0-1500-crop.jpg?v=e2f27f6628' },
+      { id: 'scorpionights3', title: 'Scorpio Nights 3', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/9/1/8/6/7/891867-scorpio-nights-3-0-1000-0-1500-crop.jpg?v=41fc67e755' },
+      { id: 'tubero', title: 'Tubero', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/2/7/8/9/4/927894-tubero-0-1000-0-1500-crop.jpg?v=d8ecea0efa' },
+      { id: 'secrets', title: 'Secrets', thumbnail: 'https://pacdn.aoneroom.com/image/2023/08/11/c15d22dd1d960af69b87d39fcb97a767.jpg?x-oss-process=image/resize%2Cw_300' },
+      { id: 'virginforest', title: 'Virgin Forest', thumbnail: 'https://pacdn.aoneroom.com/image/2023/08/11/c1be032d1b9459de50388e96ffaa3576.jpg?x-oss-process=image/resize%2Cw_300' },
+      { id: 'twoandone', title: 'Two And One', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/9/2/7/8/6/2/927862-two-and-one-0-1000-0-1500-crop.jpg?v=1083355d47' },      
+      { id: 'pamumukadkadnimirasol', title: 'Ang Pamumukadkad Ni Mirasol', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/5/0/3/2/6/1350326-ang-pamumukadkad-ni-mirasol-0-1000-0-1500-crop.jpg?v=5cf42b54c3' }, 
+      { id: 'boybastos', title: 'Boy Bastos', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/4/4/6/7/4/844674-boy-bastos-0-1000-0-1500-crop.jpg?v=c23d4da090' }, 
+      { id: 'doblado', title: 'Doblado', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/6/5/8/9/2/865892-doblado-0-1000-0-1500-crop.jpg?v=704dc434ca' }, 
+      { id: 'greed', title: 'Greed', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/0/9/2/7/5/809275-greed-0-1000-0-1500-crop.jpg?v=4d420915a2' }, 
+      { id: 'hugas', title: 'Hugas', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/3/2/0/2/2/832022-hugas-0-1000-0-1500-crop.jpg?v=31edf36565' }, 
+      { id: 'islandofdesire', title: 'Island Of Desire', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/5/4/3/9/1/854391-island-of-desire-0-1000-0-1500-crop.jpg?v=b7556a8765' }, 
+      { id: 'kolektor', title: 'Kolektor', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/1/8/9/4/9/1318949-kolektor-0-1000-0-1500-crop.jpg?v=876f80b423' }, 
+      { id: 'siklo', title: 'Siklo', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/2/9/3/0/9/829309-siklo-0-1000-0-1500-crop.jpg?v=c943228c46' }, 
+      { id: 'silipsaapoy', title: 'Silip Sa Apoy', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/3/6/7/0/6/836706-silip-sa-apoy-0-1000-0-1500-crop.jpg?v=48e08721a5' }, 
+      { id: 'sisid', title: 'Sisid', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/3/5/4/1/5/835415-sisid-2022-0-1000-0-1500-crop.jpg?v=6355cf78a3' }, 
+      { id: 'thewife', title: 'The Wife', thumbnail: 'https://pacdn.aoneroom.com/image/2023/08/11/59c5ceb3508ad8bd5aa7477235b9be34.jpg?x-oss-process=image/resize%2Cw_300' }, 
+      { id: 'xdeal2', title: 'X-Deal 2', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/8/5/4/3/8/8/854388-x-deal-2-0-1000-0-1500-crop.jpg?v=ff09561994' }, 
+      { id: 'wantedgf', title: 'Wanted : Girlfriend', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/4/8/9/9/3/1148993-wanted-girlfriend-0-1000-0-1500-crop.jpg?v=2249817006' },
+      { id: 'homeservice', title: 'Home Service', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/2/3/5/7/1/1023571-home-service-0-1000-0-1500-crop.jpg?v=5c656ff5d9' },
+      { id: 'bugaw', title: 'Bugaw', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/2/3/5/6/9/1023569-bugaw-0-1000-0-1500-crop.jpg?v=253ab845ec' },
+      // Add more video data as needed
+  ];
+
+  let currentPage = 1;
+  const rowsPerPage = 5;
+  const columnsPerPage = 5;
+  const itemsPerPage = rowsPerPage * columnsPerPage;
+  const totalRows = videoData.length;
+  const totalpages = Math.ceil(totalRows / itemsPerPage);
+
+  function createThumbnail(video) {
+      const thumbnail = document.createElement('div');
+      thumbnail.className = 'thumbnail';
+      thumbnail.style.width = '150px';
+      thumbnail.style.height = '250px';
+      thumbnail.innerHTML = `
+          <img src="${video.thumbnail}" alt="${video.title}">
+          <h2>${video.title}</h2>
+      `;
+      thumbnail.onclick = () => goToWatch(video.id);
+      return thumbnail;
+  }
+
+  function goToWatch(videoId) {
+      window.location.href = `main.html?video=${videoId}`;
+  }
+
+  function showPage(page) {
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const thumbnailsContainer = document.getElementById('video-thumbnails');
+      thumbnailsContainer.innerHTML = '';
+
+      for (let i = start; i < end && i < videoData.length; i++) {
+          thumbnailsContainer.appendChild(createThumbnail(videoData[i]));
+      }
+
+      updatePaginationControls(page);
+  }
+
+  function updatePaginationControls(page) {
+      const pageInfo = document.getElementById('page-info');
+      const prevButton = document.getElementById('prev-button');
+      const nextButton = document.getElementById('next-button');
+      pageInfo.textContent = `Page ${page} of ${totalpages}`;
+      prevButton.disabled = page <= 1;
+      nextButton.disabled = page >= totalpages;
+  }
+
+  showPage(currentPage);
+
+  function changePage(page) {
+      if (page < 1 || page > totalpages) return;
+      currentPage = page;
+      showPage(currentPage);
+  }
+
+  document.getElementById('search-bar').addEventListener('keyup', function(event) {
+      const searchTerm = event.target.value.toLowerCase();
+      const filteredData = videoData.filter(video => video.title.toLowerCase().includes(searchTerm));
+      const thumbnailsContainer = document.getElementById('video-thumbnails');
+      thumbnailsContainer.innerHTML = '';
+
+      filteredData.forEach(video => {
+          thumbnailsContainer.appendChild(createThumbnail(video));
+      });
+
+      updatePaginationControls(1);
+  });
+</script>
+
+<!-- Content End -->
+
+<!-- Start Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2025 My Website. All rights reserved.</p>
+  </div>
+</footer>
+<!-- End Footer -->
+  
+</body>
