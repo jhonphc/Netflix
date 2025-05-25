@@ -335,34 +335,42 @@ const closeModal = document.getElementById('close-modal');
 //   modal.style.display = "block";
 // }
 
-// // Close modal
-// closeModal.onclick = function () {
-//   modal.style.display = "none";
-//   modalVideo.pause();
-// };
+// Open modal when thumbnail is clicked
+function openModal(video) {
+  document.getElementById('videoTitle').textContent = video.title;
+  document.getElementById('modalSource').src = video.videoUrl;
+  document.getElementById('modal').style.display = 'block';
+}
+  
 
-  // Open modal and play video
-  document.querySelectorAll('.openModal').forEach(thumbnail => {
-    thumbnail.addEventListener('click', function () {
-      const videoId = this.getAttribute('data-id');
-      const video = videoData.find(v => v.id === videoId);
+// Close modal
+closeModal.onclick = function () {
+  modal.style.display = "none";
+  modalVideo.pause();
+};
 
-      if (video) {
-        document.getElementById('videoTitle').textContent = video.title;
-        document.getElementById('modalSource').src = video.videoUrl;
-        document.getElementById('modal').style.display = 'block';
-      }
-    });
-  });
+  // // Open modal and play video
+  // document.querySelectorAll('.openModal').forEach(thumbnail => {
+  //   thumbnail.addEventListener('click', function () {
+  //     const videoId = this.getAttribute('data-id');
+  //     const video = videoData.find(v => v.id === videoId);
 
-  // Close modal and stop video
-  document.querySelector('.close').addEventListener('click', function () {
-    const modal = document.getElementById('modal');
-    const iframe = document.getElementById('modalSource');
+  //     if (video) {
+  //       document.getElementById('videoTitle').textContent = video.title;
+  //       document.getElementById('modalSource').src = video.videoUrl;
+  //       document.getElementById('modal').style.display = 'block';
+  //     }
+  //   });
+  // });
 
-    modal.style.display = 'none';
-    iframe.src = ''; // Stops video
-  }),
+  // // Close modal and stop video
+  // document.querySelector('.close').addEventListener('click', function () {
+  //   const modal = document.getElementById('modal');
+  //   const iframe = document.getElementById('modalSource');
+
+  //   modal.style.display = 'none';
+  //   iframe.src = ''; // Stops video
+  // }),
 
     
 // Close modal when clicking outside the modal content
