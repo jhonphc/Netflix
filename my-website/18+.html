@@ -13,68 +13,6 @@
   
   <!-- Inlined CSS START-->
   <style>
-    /* body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f0f0f0;
-        color: #333;
-        margin: 0;
-        padding: 0;
-    }
-
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #000000;
-        color: white;
-        padding: 15px 25px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .header-left {
-        display: flex;
-        align-items: center;
-    }
-
-    .logo {
-        width: 60px;
-        height: auto;
-        margin-right: 15px;
-    }
-
-    .header-left h1 {
-        margin: 0;
-        font-size: 1.8em;
-    }
-
-    .header-right input {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-size: 1em;
-        background-color: #f8f8f8;
-    }
-
-    .social-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #f0f0f0;
-        padding: 15px;
-        margin-bottom: 20px;
-        font-size: 1.2em;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .social-link a {
-        text-decoration: none;
-        color: #333;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    } */
-
     main {
         padding: 20px;
     }
@@ -198,8 +136,21 @@
   <button onclick="changePage(currentPage + 1)" id="next-button" disabled>Next</button>
 </div>
 
-<script>
-  const videoData = [
+<!-- Modal for streaming -->
+  <div class="modal" id="videoModal">
+    <button class="close-btn" onclick="closeModal()">×</button>
+    <video id="videoPlayer" controls>
+      <source src="" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <button onclick="toggleFullscreen()">Fullscreen</button>
+  </div>
+
+  <script>
+    const moviesPerPage = 6;
+    let currentPage = 1;
+
+    const movieList = [
       { id: 'walker', title: 'Walker', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/6/8/2/1205682-walker-2025-0-1000-0-1500-crop.jpg?v=92123f9e6f' },
       { id: 'pilya', title: 'Pilya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/3/1/9/4/7/1231947-pilya-2024-0-1000-0-1500-crop.jpg?v=7cd1e6b8ff' },
       { id: 'paluwagan', title: 'Paluwagan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/3/1205703-paluwagan-0-1000-0-1500-crop.jpg?v=58fc0d756c' },
@@ -298,73 +249,77 @@
       // Add more video data as needed
   ];
 
-  let currentPage = 1;
-  const rowsPerPage = 5;
-  const columnsPerPage = 5;
-  const itemsPerPage = rowsPerPage * columnsPerPage;
-  const totalRows = videoData.length;
-  const totalpages = Math.ceil(totalRows / itemsPerPage);
+    function renderMovies(page) {
+      const start = (page - 1) * moviesPerPage;
+      const end = start + moviesPerPage;
+      const moviesToShow = movieList.slice(start, end);
 
-  function createThumbnail(video) {
-      const thumbnail = document.createElement('div');
-      thumbnail.className = 'thumbnail';
-      thumbnail.style.width = '150px';
-      thumbnail.style.height = '250px';
-      thumbnail.innerHTML = `
-          <img src="${video.thumbnail}" alt="${video.title}">
-          <h2>${video.title}</h2>
-      `;
-      thumbnail.onclick = () => goToWatch(video.id);
-      return thumbnail;
-  }
+      const container = document.getElementById("movie-container");
+      container.innerHTML = "";
 
-  function goToWatch(videoId) {
-      window.location.href = `main.html?video=${videoId}`;
-  }
-
-  function showPage(page) {
-      const start = (page - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-      const thumbnailsContainer = document.getElementById('video-thumbnails');
-      thumbnailsContainer.innerHTML = '';
-
-      for (let i = start; i < end && i < videoData.length; i++) {
-          thumbnailsContainer.appendChild(createThumbnail(videoData[i]));
-      }
-
-      updatePaginationControls(page);
-  }
-
-  function updatePaginationControls(page) {
-      const pageInfo = document.getElementById('page-info');
-      const prevButton = document.getElementById('prev-button');
-      const nextButton = document.getElementById('next-button');
-      pageInfo.textContent = `Page ${page} of ${totalpages}`;
-      prevButton.disabled = page <= 1;
-      nextButton.disabled = page >= totalpages;
-  }
-
-  showPage(currentPage);
-
-  function changePage(page) {
-      if (page < 1 || page > totalpages) return;
-      currentPage = page;
-      showPage(currentPage);
-  }
-
-  document.getElementById('search-bar').addEventListener('keyup', function(event) {
-      const searchTerm = event.target.value.toLowerCase();
-      const filteredData = videoData.filter(video => video.title.toLowerCase().includes(searchTerm));
-      const thumbnailsContainer = document.getElementById('video-thumbnails');
-      thumbnailsContainer.innerHTML = '';
-
-      filteredData.forEach(video => {
-          thumbnailsContainer.appendChild(createThumbnail(video));
+      moviesToShow.forEach(movie => {
+        const movieElement = document.createElement("div");
+        movieElement.classList.add("thumbnail");
+        movieElement.innerHTML = `
+          <img src="${movie.thumbnail}" alt="${movie.title}">
+          <h2>${movie.title}</h2>
+        `;
+        movieElement.addEventListener("click", () => openModal(movie.videoLink));
+        container.appendChild(movieElement);
       });
+    }
 
-      updatePaginationControls(1);
-  });
-</script>
+    function renderPagination() {
+      const totalPages = Math.ceil(movieList.length / moviesPerPage);
+      const paginationContainer = document.getElementById("pagination");
+      paginationContainer.innerHTML = "";
+
+      for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement("button");
+        button.textContent = i;
+        if (i === currentPage) {
+          button.classList.add("active");
+        }
+        button.addEventListener("click", () => {
+          currentPage = i;
+          renderMovies(currentPage);
+          renderPagination();
+        });
+        paginationContainer.appendChild(button);
+      }
+    }
+
+    function openModal(videoSrc) {
+      const modal = document.getElementById("videoModal");
+      const player = document.getElementById("videoPlayer");
+      player.src = videoSrc;
+      modal.style.display = "flex";
+      player.play();
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("videoModal");
+      const player = document.getElementById("videoPlayer");
+      modal.style.display = "none";
+      player.pause();
+      player.currentTime = 0;
+    }
+
+    function toggleFullscreen() {
+      const video = document.getElementById("videoPlayer");
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+    }
+
+    // Initial render
+    renderMovies(currentPage);
+    renderPagination();
+  </script>
 
 <!-- Content End -->
 
