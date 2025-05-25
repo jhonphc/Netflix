@@ -1,4 +1,4 @@
-<html lang="en">
+c<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -248,7 +248,12 @@
       { id: 'bugaw', title: 'Bugaw', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/2/3/5/6/9/1023569-bugaw-0-1000-0-1500-crop.jpg?v=253ab845ec' },
       // Add more video data as needed
   ];
-
+let currentPage = 1;
+  const rowsPerPage = 5;
+  const columnsPerPage = 5;
+  const itemsPerPage = rowsPerPage * columnsPerPage;
+  const totalRows = videoData.length;
+  const totalpages = Math.ceil(totalRows / itemsPerPage);
     function renderMovies(page) {
       const start = (page - 1) * moviesPerPage;
       const end = start + moviesPerPage;
