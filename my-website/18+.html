@@ -306,19 +306,19 @@
       return thumbnail;
   }
 
-  function goToWatch(videoId) {
-      window.location.href = `main.html?video=${videoId}`;
-  }
+  // function goToWatch(videoId) {
+  //     window.location.href = `main.html?video=${videoId}`;
+  // }
 
-  function showPage(page) {
-      const start = (page - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-      const thumbnailsContainer = document.getElementById('video-thumbnails');
-      thumbnailsContainer.innerHTML = '';
+  // function showPage(page) {
+  //     const start = (page - 1) * itemsPerPage;
+  //     const end = start + itemsPerPage;
+  //     const thumbnailsContainer = document.getElementById('video-thumbnails');
+  //     thumbnailsContainer.innerHTML = '';
 
-      for (let i = start; i < end && i < videoData.length; i++) {
-          thumbnailsContainer.appendChild(createThumbnail(videoData[i]));
-      }
+  //     for (let i = start; i < end && i < videoData.length; i++) {
+  //         thumbnailsContainer.appendChild(createThumbnail(videoData[i]));
+  //     }
 
       updatePaginationControls(page);
   }
