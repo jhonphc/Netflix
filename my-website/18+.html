@@ -306,19 +306,19 @@
       return thumbnail;
   }
 
-  // function goToWatch(videoId) {
-  //     window.location.href = `main.html?video=${videoId}`;
-  // }
+  function goToWatch(videoId) {
+      window.location.href = `main.html?video=${videoId}`;
+  }
 
-  // function showPage(page) {
-  //     const start = (page - 1) * itemsPerPage;
-  //     const end = start + itemsPerPage;
-  //     const thumbnailsContainer = document.getElementById('video-thumbnails');
-  //     thumbnailsContainer.innerHTML = '';
+  function showPage(page) {
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const thumbnailsContainer = document.getElementById('video-thumbnails');
+      thumbnailsContainer.innerHTML = '';
 
-  //     for (let i = start; i < end && i < videoData.length; i++) {
-  //         thumbnailsContainer.appendChild(createThumbnail(videoData[i]));
-  //     }
+      for (let i = start; i < end && i < videoData.length; i++) {
+          thumbnailsContainer.appendChild(createThumbnail(videoData[i]));
+      }
 
       updatePaginationControls(page);
   }
@@ -339,47 +339,6 @@
       currentPage = page;
       showPage(currentPage);
   }
-  
-  itemsToShow.forEach(video => {
-  const div = document.createElement('div');
-  div.className = 'thumbnail';
-  div.innerHTML = `
-    <img src="${video.thumbnail}" alt="${video.title}">
-    <h2>${video.title}</h2>
-  `;
-  div.onclick = () => openModal(video);
-  thumbnailsContainer.appendChild(div);
-});
-
-  
-const modal = document.getElementById('video-modal');
-const modalTitle = document.getElementById('modal-title');
-const modalVideo = document.getElementById('modal-video');
-const modalSource = document.getElementById('modal-source');
-const closeModal = document.getElementById('close-modal');
-
-// Open modal when thumbnail is clicked
-function openModal(video) {
-  modalTitle.textContent = video.title;
-  modalSource.src = video.videoUrl;
-  modalVideo.load();
-  modal.style.display = "block";
-}
-
-// Close modal
-closeModal.onclick = function () {
-  modal.style.display = "none";
-  modalVideo.pause();
-};
-
-// Close modal when clicking outside the modal content
-window.onclick = function (event) {
-  if (event.target === modal) {
-    modal.style.display = "none";
-    modalVideo.pause();
-  }
-};
-
   
 
   document.getElementById('search-bar').addEventListener('keyup', function(event) {
