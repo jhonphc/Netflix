@@ -254,7 +254,7 @@
       const end = start + moviesPerPage;
       const moviesToShow = movieList.slice(start, end);
 
-      const container = document.getElementById("movie-container");
+      const container = document.getElementById("video-thumbnails");
       container.innerHTML = "";
 
       moviesToShow.forEach(movie => {
@@ -271,7 +271,7 @@
 
     function renderPagination() {
       const totalPages = Math.ceil(movieList.length / moviesPerPage);
-      const paginationContainer = document.getElementById("pagination");
+      const paginationContainer = document.getElementById("pagination-controls");
       paginationContainer.innerHTML = "";
 
       for (let i = 1; i <= totalPages; i++) {
