@@ -13,66 +13,142 @@
   
   <!-- Inlined CSS START-->
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #fff;
-      margin: 0;
-      padding: 0;
+    /* body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+        margin: 0;
+        padding: 0;
     }
+
     header {
-      background-color: #e50914;
-      padding: 1rem;
-      text-align: center;
-      font-size: 2rem;
-      font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #000000;
+        color: white;
+        padding: 15px 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 1rem;
-      padding: 1rem;
+
+    .header-left {
+        display: flex;
+        align-items: center;
     }
+
+    .logo {
+        width: 60px;
+        height: auto;
+        margin-right: 15px;
+    }
+
+    .header-left h1 {
+        margin: 0;
+        font-size: 1.8em;
+    }
+
+    .header-right input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1em;
+        background-color: #f8f8f8;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f0f0f0;
+        padding: 15px;
+        margin-bottom: 20px;
+        font-size: 1.2em;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-link a {
+        text-decoration: none;
+        color: #333;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    } */
+
+    main {
+        padding: 20px;
+    }
+
+    .video-thumbnails {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        justify-items: center;
+    }
+
     .thumbnail {
-      background-color: #222;
-      border-radius: 10px;
-      overflow: hidden;
-      text-align: center;
-      transition: transform 0.3s ease;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
     }
+
     .thumbnail:hover {
-      transform: scale(1.05);
+        transform: scale(1.05);
     }
+
     .thumbnail img {
-      width: 100%;
-      height: auto;
-      display: block;
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: cover;
     }
+
     .thumbnail h2 {
-      font-size: 1rem;
-      padding: 0.5rem;
-      color: #fff;
+        margin: 10px 0 0 0;
+        color: #330416;
+        font-size: 14px;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
-    .pagination {
-      text-align: center;
-      margin: 1rem 0;
+
+    .pagination-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
     }
-    .pagination button {
-      background-color: #e50914;
-      color: white;
-      border: none;
-      margin: 0 5px;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      border-radius: 5px;
+
+    .pagination-controls button {
+        padding: 10px 15px;
+        margin: 0 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f0f0f0;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease-in-out;
     }
-    .pagination button.active {
-      background-color: #b00610;
+
+    .pagination-controls button:hover {
+        background-color: #e0e0e0;
     }
-    .pagination button:hover {
-      background-color: #ff0a16;
+
+    .pagination-controls button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
     }
-  </style>
+</style>
   <!-- Inlined CSS END -->
 
 
@@ -110,14 +186,20 @@
 
 <!-- Content start -->
 
-<div class="container" id="movie-container"></div>
-  <div class="pagination" id="pagination"></div>
+<main>
+  <div class="video-thumbnails" id="video-thumbnails">
+      <!-- Thumbnails will be dynamically added here -->
+  </div>
+</main>
 
-  <script>
-    const moviesPerPage = 6;
-    let currentPage = 1;
+<div class="pagination-controls" id="pagination-controls">
+  <button onclick="changePage(currentPage - 1)" id="prev-button" disabled>Previous</button>
+  <span id="page-info">Page 1 of 1</span>
+  <button onclick="changePage(currentPage + 1)" id="next-button" disabled>Next</button>
+</div>
 
-    const movieList = [
+<script>
+  const videoData = [
       { id: 'walker', title: 'Walker', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/6/8/2/1205682-walker-2025-0-1000-0-1500-crop.jpg?v=92123f9e6f' },
       { id: 'pilya', title: 'Pilya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/3/1/9/4/7/1231947-pilya-2024-0-1000-0-1500-crop.jpg?v=7cd1e6b8ff' },
       { id: 'paluwagan', title: 'Paluwagan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/3/1205703-paluwagan-0-1000-0-1500-crop.jpg?v=58fc0d756c' },
@@ -216,53 +298,73 @@
       // Add more video data as needed
   ];
 
-    function renderMovies(page) {
-      const start = (page - 1) * moviesPerPage;
-      const end = start + moviesPerPage;
-      const moviesToShow = movieList.slice(start, end);
+  let currentPage = 1;
+  const rowsPerPage = 5;
+  const columnsPerPage = 5;
+  const itemsPerPage = rowsPerPage * columnsPerPage;
+  const totalRows = videoData.length;
+  const totalpages = Math.ceil(totalRows / itemsPerPage);
 
-      const container = document.getElementById("movie-container");
-      container.innerHTML = "";
+  function createThumbnail(video) {
+      const thumbnail = document.createElement('div');
+      thumbnail.className = 'thumbnail';
+      thumbnail.style.width = '150px';
+      thumbnail.style.height = '250px';
+      thumbnail.innerHTML = `
+          <img src="${video.thumbnail}" alt="${video.title}">
+          <h2>${video.title}</h2>
+      `;
+      thumbnail.onclick = () => goToWatch(video.id);
+      return thumbnail;
+  }
 
-      moviesToShow.forEach(movie => {
-        const movieElement = document.createElement("div");
-        movieElement.classList.add("thumbnail");
+  function goToWatch(videoId) {
+      window.location.href = `main.html?video=${videoId}`;
+  }
 
-        movieElement.innerHTML = `
-          <a href="${movie.videoLink}" target="_blank">
-            <img src="${movie.thumbnail}" alt="${movie.title}">
-            <h2>${movie.title}</h2>
-          </a>
-        `;
+  function showPage(page) {
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const thumbnailsContainer = document.getElementById('video-thumbnails');
+      thumbnailsContainer.innerHTML = '';
 
-        container.appendChild(movieElement);
-      });
-    }
-
-    function renderPagination() {
-      const totalPages = Math.ceil(movieList.length / moviesPerPage);
-      const paginationContainer = document.getElementById("pagination");
-      paginationContainer.innerHTML = "";
-
-      for (let i = 1; i <= totalPages; i++) {
-        const button = document.createElement("button");
-        button.textContent = i;
-        if (i === currentPage) {
-          button.classList.add("active");
-        }
-        button.addEventListener("click", () => {
-          currentPage = i;
-          renderMovies(currentPage);
-          renderPagination();
-        });
-        paginationContainer.appendChild(button);
+      for (let i = start; i < end && i < videoData.length; i++) {
+          thumbnailsContainer.appendChild(createThumbnail(videoData[i]));
       }
-    }
 
-    // Initial render
-    renderMovies(currentPage);
-    renderPagination();
-  </script>
+      updatePaginationControls(page);
+  }
+
+  function updatePaginationControls(page) {
+      const pageInfo = document.getElementById('page-info');
+      const prevButton = document.getElementById('prev-button');
+      const nextButton = document.getElementById('next-button');
+      pageInfo.textContent = `Page ${page} of ${totalpages}`;
+      prevButton.disabled = page <= 1;
+      nextButton.disabled = page >= totalpages;
+  }
+
+  showPage(currentPage);
+
+  function changePage(page) {
+      if (page < 1 || page > totalpages) return;
+      currentPage = page;
+      showPage(currentPage);
+  }
+
+  document.getElementById('search-bar').addEventListener('keyup', function(event) {
+      const searchTerm = event.target.value.toLowerCase();
+      const filteredData = videoData.filter(video => video.title.toLowerCase().includes(searchTerm));
+      const thumbnailsContainer = document.getElementById('video-thumbnails');
+      thumbnailsContainer.innerHTML = '';
+
+      filteredData.forEach(video => {
+          thumbnailsContainer.appendChild(createThumbnail(video));
+      });
+
+      updatePaginationControls(1);
+  });
+</script>
 
 <!-- Content End -->
 
