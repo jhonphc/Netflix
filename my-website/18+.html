@@ -304,7 +304,7 @@
           <img src="${video.thumbnail}" alt="${video.title}">
           <h2>${video.title}</h2>
       `;
-      thumbnail.onclick = () => openModal(video);
+      thumbnail.onclick = () => openModal(video.id);
       return thumbnail;
   }
 
