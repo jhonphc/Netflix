@@ -181,9 +181,8 @@
   <div class="modal-content">
     <span class="close" id="close-modal">&times;</span>
     <h2 id="modal-title"></h2>
-   <video id="modal-video" controls>
       <iframe id="modal-source" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
-    </video>
+    
   </div>
 </div>
 
@@ -323,7 +322,7 @@
 
   const modal = document.getElementById('video-modal');
 const modalTitle = document.getElementById('modal-title');
-const modalVideo = document.getElementById('modal-video');
+// const modalVideo = document.getElementById('modal-video');
 const modalSource = document.getElementById('modal-source');
 const closeModal = document.getElementById('close-modal');
 
@@ -331,7 +330,7 @@ const closeModal = document.getElementById('close-modal');
 function openModal(video) {
   modalTitle.textContent = video.title;
   modalSource.src = video.videoUrl;
-  modalVideo.load();
+  // modalVideo.load();
   modal.style.display = "block";
 }
 
@@ -340,7 +339,7 @@ function openModal(video) {
 // Close modal
 closeModal.onclick = function () {
   modal.style.display = "none";
-  modalVideo.pause();
+  modalSource.pause();
 };
 
     
@@ -348,7 +347,7 @@ closeModal.onclick = function () {
 window.onclick = function (event) {
   if (event.target === modal) {
     modal.style.display = "none";
-    modalVideo.pause();
+    modalSource.pause();
   }
 };
   
