@@ -147,8 +147,6 @@ c<html lang="en">
   </div>
 
   <script>
-    const moviesPerPage = 6;
-    let currentPage = 1;
 
     const movieList = [
       { id: 'walker', title: 'Walker', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/6/8/2/1205682-walker-2025-0-1000-0-1500-crop.jpg?v=92123f9e6f' },
@@ -252,9 +250,11 @@ let currentPage = 1;
   const rowsPerPage = 5;
   const columnsPerPage = 5;
   const itemsPerPage = rowsPerPage * columnsPerPage;
-  const totalRows = videoData.length;
+  const totalRows = movieList.length;
   const totalpages = Math.ceil(totalRows / itemsPerPage);
-    function renderMovies(page) {
+    
+  
+function renderMovies(page) {
       const start = (page - 1) * moviesPerPage;
       const end = start + moviesPerPage;
       const moviesToShow = movieList.slice(start, end);
