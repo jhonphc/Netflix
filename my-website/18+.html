@@ -190,7 +190,7 @@
 
 <script>
   const videoData = [
-      { id: 'walker', title: 'Walker', videoUrl: 'https://drive.google.com/file/d/1vWxHVqvmOQnO-nAf4UZYln9KFo-cQmi7/preview', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/6/8/2/1205682-walker-2025-0-1000-0-1500-crop.jpg?v=92123f9e6f' },
+      { id: 'walker', title: 'Walker', videoUrl: "https://drive.google.com/file/d/1vWxHVqvmOQnO-nAf4UZYln9KFo-cQmi7/preview", thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/6/8/2/1205682-walker-2025-0-1000-0-1500-crop.jpg?v=92123f9e6f' },
       { id: 'pilya', title: 'Pilya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/3/1/9/4/7/1231947-pilya-2024-0-1000-0-1500-crop.jpg?v=7cd1e6b8ff' },
       { id: 'paluwagan', title: 'Paluwagan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/3/1205703-paluwagan-0-1000-0-1500-crop.jpg?v=58fc0d756c' },
       { id: 'privatetutor', title: 'Private Tutor', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/2/1205702-private-tutor-0-1000-0-1500-crop.jpg?v=5c49f502f6' },
@@ -304,7 +304,7 @@
           <img src="${video.thumbnail}" alt="${video.title}">
           <h2>${video.title}</h2>
       `;
-      thumbnail.onclick = () => openModal(video.id);
+      thumbnail.onclick = () => openModal(video);
       return thumbnail;
   }
 
