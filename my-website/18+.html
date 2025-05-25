@@ -308,79 +308,148 @@
       return thumbnail;
   }
 
-  const modal = document.getElementById('video-modal');
-const modalTitle = document.getElementById('modal-title');
-const modalVideo = document.getElementById('modal-video');
-const modalSource = document.getElementById('modal-source');
-const closeModal = document.getElementById('close-modal');
+//   const modal = document.getElementById('video-modal');
+// const modalTitle = document.getElementById('modal-title');
+// const modalVideo = document.getElementById('modal-video');
+// const modalSource = document.getElementById('modal-source');
+// const closeModal = document.getElementById('close-modal');
 
-// Open modal when thumbnail is clicked
-function openModal(video) {
-  modalTitle.textContent = video.title;
-  modalSource.src = video.videoUrl;
-  modalVideo.load();
-  modal.style.display = "block";
-}
+// // Open modal when thumbnail is clicked
+// function openModal(video) {
+//   modalTitle.textContent = video.title;
+//   modalSource.src = video.videoUrl;
+//   modalVideo.load();
+//   modal.style.display = "block";
+// }
 
-// Close modal
-closeModal.onclick = function () {
-  modal.style.display = "none";
-  modalVideo.pause();
-};
+// // Close modal
+// closeModal.onclick = function () {
+//   modal.style.display = "none";
+//   modalVideo.pause();
+// };
 
-// Close modal when clicking outside the modal content
-window.onclick = function (event) {
-  if (event.target === modal) {
-    modal.style.display = "none";
-    modalVideo.pause();
-  }
-};
+// // Close modal when clicking outside the modal content
+// window.onclick = function (event) {
+//   if (event.target === modal) {
+//     modal.style.display = "none";
+//     modalVideo.pause();
+//   }
+// };
   
 
-  function showPage(page) {
-      const start = (page - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-      const thumbnailsContainer = document.getElementById('video-thumbnails');
-      thumbnailsContainer.innerHTML = '';
+//   function showPage(page) {
+//       const start = (page - 1) * itemsPerPage;
+//       const end = start + itemsPerPage;
+//       const thumbnailsContainer = document.getElementById('video-thumbnails');
+//       thumbnailsContainer.innerHTML = '';
 
-      for (let i = start; i < end && i < videoData.length; i++) {
-          thumbnailsContainer.appendChild(createThumbnail(videoData[i]));
-      }
+//       for (let i = start; i < end && i < videoData.length; i++) {
+//           thumbnailsContainer.appendChild(createThumbnail(videoData[i]));
+//       }
 
-      updatePaginationControls(page);
+//       updatePaginationControls(page);
+//   }
+
+//   function updatePaginationControls(page) {
+//       const pageInfo = document.getElementById('page-info');
+//       const prevButton = document.getElementById('prev-button');
+//       const nextButton = document.getElementById('next-button');
+//       pageInfo.textContent = `Page ${page} of ${totalpages}`;
+//       prevButton.disabled = page <= 1;
+//       nextButton.disabled = page >= totalpages;
+//   }
+
+//   showPage(currentPage);
+
+//   function changePage(page) {
+//       if (page < 1 || page > totalpages) return;
+//       currentPage = page;
+//       showPage(currentPage);
+//   }
+
+//   document.getElementById('search-bar').addEventListener('keyup', function(event) {
+//       const searchTerm = event.target.value.toLowerCase();
+//       const filteredData = videoData.filter(video => video.title.toLowerCase().includes(searchTerm));
+//       const thumbnailsContainer = document.getElementById('video-thumbnails');
+//       thumbnailsContainer.innerHTML = '';
+
+//       filteredData.forEach(video => {
+//           thumbnailsContainer.appendChild(createThumbnail(video));
+//       });
+
+//       updatePaginationControls(1);
+//   });
+// 
+const videoThumbnailsContainer = document.getElementById("video-thumbnails");
+  const modal = document.getElementById("video-modal");
+  const modalTitle = document.getElementById("modal-title");
+  const modalVideo = document.getElementById("modal-video");
+  const modalSource = document.getElementById("modal-source");
+  const closeModalBtn = document.getElementById("close-modal");
+  const prevBtn = document.getElementById("prev-button");
+  const nextBtn = document.getElementById("next-button");
+  const pageInfo = document.getElementById("page-info");
+
+  function renderThumbnails(page) {
+    videoThumbnailsContainer.innerHTML = "";
+    const start = (page - 1) * thumbnailsPerPage;
+    const end = start + thumbnailsPerPage;
+    const pageVideos = videoData.slice(start, end);
+
+    pageVideos.forEach((video) => {
+      const thumb = document.createElement("img");
+      thumb.src = video.thumbnail;
+      thumb.alt = video.title;
+      thumb.title = video.title;
+      thumb.classList.add("thumbnail");
+      thumb.style.cursor = "pointer";
+      thumb.addEventListener("click", () => openModal(video));
+      videoThumbnailsContainer.appendChild(thumb);
+    });
+
+    pageInfo.textContent = `Page ${page} of ${totalPages}`;
+    prevBtn.disabled = page <= 1;
+    nextBtn.disabled = page >= totalPages;
   }
 
-  function updatePaginationControls(page) {
-      const pageInfo = document.getElementById('page-info');
-      const prevButton = document.getElementById('prev-button');
-      const nextButton = document.getElementById('next-button');
-      pageInfo.textContent = `Page ${page} of ${totalpages}`;
-      prevButton.disabled = page <= 1;
-      nextButton.disabled = page >= totalpages;
-  }
+  function openModal(video) {
+    modalTitle.textContent = video.title;
 
-  showPage(currentPage);
-
-  function changePage(page) {
-      if (page < 1 || page > totalpages) return;
-      currentPage = page;
-      showPage(currentPage);
-  }
-
-  document.getElementById('search-bar').addEventListener('keyup', function(event) {
-      const searchTerm = event.target.value.toLowerCase();
-      const filteredData = videoData.filter(video => video.title.toLowerCase().includes(searchTerm));
-      const thumbnailsContainer = document.getElementById('video-thumbnails');
-      thumbnailsContainer.innerHTML = '';
-
-      filteredData.forEach(video => {
-          thumbnailsContainer.appendChild(createThumbnail(video));
+    if (video.videoUrl) {
+      modalSource.src = video.videoUrl;
+      modalVideo.load();
+      modal.style.display = "flex";
+      modalVideo.play().catch((err) => {
+        // Catch errors like autoplay block
+        console.log("Video play prevented:", err);
       });
+    } else {
+      alert("Video URL not available for this title.");
+    }
+  }
 
-      updatePaginationControls(1);
+  function closeModal() {
+    modal.style.display = "none";
+    modalVideo.pause();
+    modalSource.src = "";
+  }
+
+  function changePage(newPage) {
+    if (newPage < 1 || newPage > totalPages) return;
+    currentPage = newPage;
+    renderThumbnails(currentPage);
+  }
+
+  closeModalBtn.addEventListener("click", closeModal);
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
   });
-</script>
 
+  prevBtn.addEventListener("click", () => changePage(currentPage - 1));
+  nextBtn.addEventListener("click", () => changePage(currentPage + 1));
+
+  renderThumbnails(currentPage);
+</script>
 <!-- Content End -->
 
 <!-- Start Footer -->
