@@ -165,23 +165,12 @@
 <!-- End Navigation Bar -->
 
 <!-- Content start -->
-
-<!--   <div class="modal" id="video-modal">
-  <div class="modal-content">
-    <span class="close" id="close-modal">&times;</span>
-    <h2 id="modal-title"></h2>
-    <video id="modal-video" controls>
-      <source id="modal-source" src="" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-</div> -->
   
   <div class="modal" id="video-modal">
   <div class="modal-content">
     <span class="close" id="close-modal">&times;</span>
     <h2 id="modal-title"></h2>
-      <iframe id="modal-source" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+      <iframe id="modal-source" width="100%" height="300" frameborder="0" allowfullscreen></iframe>
     
   </div>
 </div>
@@ -202,24 +191,64 @@
 
 <script>
   const videoData = [
-      { id: 'walker', title: 'Walker', videoUrl: "https://drive.google.com/file/d/1vWxHVqvmOQnO-nAf4UZYln9KFo-cQmi7/preview", thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/6/8/2/1205682-walker-2025-0-1000-0-1500-crop.jpg?v=92123f9e6f' },
-      { id: 'pilya', title: 'Pilya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/3/1/9/4/7/1231947-pilya-2024-0-1000-0-1500-crop.jpg?v=7cd1e6b8ff' },
-      { id: 'paluwagan', title: 'Paluwagan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/3/1205703-paluwagan-0-1000-0-1500-crop.jpg?v=58fc0d756c' },
-      { id: 'privatetutor', title: 'Private Tutor', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/2/1205702-private-tutor-0-1000-0-1500-crop.jpg?v=5c49f502f6' },
-      { id: 'backrider', title: 'Back Rider', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/9/4/3/1/8/1194318-backrider-0-1000-0-1500-crop.jpg?v=6e3d0d5def' },
-      { id: 'pantasyanitami', title: 'Pantasya Ni Tami', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/0/9/8/9/8/1109898-pantasya-ni-tami-0-1000-0-1500-crop.jpg?v=30a2ab684b' },
-      { id: 'jowacollector', title: 'The Jowa Collector', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/4/6/9/8/7/1346987-the-jowa-collector-0-1000-0-1500-crop.jpg?v=375f64cf4a' },
-      { id: 'tayuan', title: 'Tayuan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/1/5/7/0/9/1015709-tayuan-0-1000-0-1500-crop.jpg?v=e967fdd7a8' },
-      { id: 'sabik', title: 'Sabik', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/4/3/1/3/0/1343130-sabik-2025-0-1000-0-1500-crop.jpg?v=e4f2c58ae9' },
-      { id: 'puriforrent', title: 'Puri For Rent', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/2/7/6/6/7/1327667-puri-for-rent-0-1000-0-1500-crop.jpg?v=9178778b27' },
-      { id: 'kasalo', title: 'Kasalo', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/2/7/6/9/6/1127696-kasalo-0-1000-0-1500-crop.jpg?v=13df49acd5' },
-      { id: 'init', title: 'Init', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/4/0/0/5/1184005-init-0-1000-0-1500-crop.jpg?v=5187191788' },
-      { id: 'hiraya', title: 'Hiraya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/7/1/8/0/1187180-hiraya-0-1000-0-1500-crop.jpg?v=8873735ba7' },
-      { id: 'fbuddies', title: 'F-Buddies', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/0/1205700-f-buddies-0-1000-0-1500-crop.jpg?v=aac1b45e10' },
-      { id: 'cita', title: 'Cita', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/4/0/2/5/1184025-cita-0-1000-0-1500-crop.jpg?v=59f2833780' },
-      { id: 'deepinside', title: 'Deep Inside Angeli Khang', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/4/3/1/2/0/1343120-deep-inside-angeli-khang-0-1000-0-1500-crop.jpg?v=18ff5a4418' },
-      { id: 'cheaters', title: 'Cheaters', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/4/0/6/9/9/1140699-cheaters-0-1000-0-1500-crop.jpg?v=3102e5bfe0' },
-      { id: 'throuple', title: 'Throuple', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/2/6/7/0/1202670-throuple-2024-1-0-1000-0-1500-crop.jpg?v=1fe4e2146a' },
+      
+    { id: 'walker', title: 'Walker', 
+       videoUrl: "https://drive.google.com/file/d/1vWxHVqvmOQnO-nAf4UZYln9KFo-cQmi7/preview", 
+       thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/6/8/2/1205682-walker-2025-0-1000-0-1500-crop.jpg?v=92123f9e6f' },
+      
+    { id: 'pilya', title: 'Pilya', 
+       videoUrl: "https://drive.google.com/file/d/1OPCgch5lX0NmXekgBwigcbAjICCMkhsJ/preview", 
+       thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/3/1/9/4/7/1231947-pilya-2024-0-1000-0-1500-crop.jpg?v=7cd1e6b8ff' },
+      
+    { id: 'paluwagan', title: 'Paluwagan', 
+       videoUrl: "https://drive.google.com/file/d/1CPyRZC42lVtMsx1NLLsYGjGyytLxxSO-/preview", 
+       thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/3/1205703-paluwagan-0-1000-0-1500-crop.jpg?v=58fc0d756c' },
+      
+    { id: 'privatetutor', title: 'Private Tutor', 
+       videoUrl: "https://drive.google.com/file/d/1b7iANtgv75chYuLFd0XHtcmWf4vCaphj/preview", 
+       thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/2/1205702-private-tutor-0-1000-0-1500-crop.jpg?v=5c49f502f6' },
+      
+    { id: 'backrider', title: 'Back Rider', 
+       videoUrl: "https://drive.google.com/file/d/1gZZ2ha9yv07dxeHUWQ3geFaV9zr9fyVZ/preview", 
+       thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/9/4/3/1/8/1194318-backrider-0-1000-0-1500-crop.jpg?v=6e3d0d5def' },
+      
+    { id: 'pantasyanitami', title: 'Pantasya Ni Tami', 
+       videoUrl: "https://drive.google.com/file/d/1_TYP3g7ZfobUpjRZ-loDw1JelKwiq3kb/preview",
+       thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/0/9/8/9/8/1109898-pantasya-ni-tami-0-1000-0-1500-crop.jpg?v=30a2ab684b' },
+      
+    { id: 'jowacollector', title: 'The Jowa Collector', 
+       videoUrl: "https://drive.google.com/file/d/1eZKDrj6boF8DbZs-8o1I9aRDvwNJS1zR/preview",
+       thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/4/6/9/8/7/1346987-the-jowa-collector-0-1000-0-1500-crop.jpg?v=375f64cf4a' },
+      
+    { id: 'tayuan', title: 'Tayuan', 
+       videoUrl: "https://drive.google.com/file/d/11qnUHUwYIGSjIjH8yvCvMCmizlH9rY3C/preview",
+       thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/0/1/5/7/0/9/1015709-tayuan-0-1000-0-1500-crop.jpg?v=e967fdd7a8' },
+      
+    { id: 'sabik', title: 'Sabik', 
+       videoUrl: "https://drive.google.com/file/d/1sTnEeyK1bV68b3hbargHfTYb7C9VYcfg/preview",
+       thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/4/3/1/3/0/1343130-sabik-2025-0-1000-0-1500-crop.jpg?v=e4f2c58ae9' },
+      
+    { id: 'puriforrent', title: 'Puri For Rent', 
+      videoUrl: "https://drive.google.com/file/d/1ZfodM74XUrWf1Dd0FpzYqKIdgRmJN8pB/preview",
+     thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/2/7/6/6/7/1327667-puri-for-rent-0-1000-0-1500-crop.jpg?v=9178778b27' },
+      
+    { id: 'kasalo', title: 'Kasalo', 
+       videoUrl: "https://drive.google.com/file/d/1Sisc5L-9puDiTZecj3dAAiZ63ZaAKVyt/preview",
+       thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/2/7/6/9/6/1127696-kasalo-0-1000-0-1500-crop.jpg?v=13df49acd5' },
+      
+    { id: 'init', title: 'Init', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/4/0/0/5/1184005-init-0-1000-0-1500-crop.jpg?v=5187191788' },
+      
+    { id: 'hiraya', title: 'Hiraya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/7/1/8/0/1187180-hiraya-0-1000-0-1500-crop.jpg?v=8873735ba7' },
+      
+    { id: 'fbuddies', title: 'F-Buddies', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/0/1205700-f-buddies-0-1000-0-1500-crop.jpg?v=aac1b45e10' },
+      
+    { id: 'cita', title: 'Cita', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/4/0/2/5/1184025-cita-0-1000-0-1500-crop.jpg?v=59f2833780' },
+      
+    { id: 'deepinside', title: 'Deep Inside Angeli Khang', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/3/4/3/1/2/0/1343120-deep-inside-angeli-khang-0-1000-0-1500-crop.jpg?v=18ff5a4418' },
+      
+    { id: 'cheaters', title: 'Cheaters', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/4/0/6/9/9/1140699-cheaters-0-1000-0-1500-crop.jpg?v=3102e5bfe0' },
+      
+    { id: 'throuple', title: 'Throuple', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/2/6/7/0/1202670-throuple-2024-1-0-1000-0-1500-crop.jpg?v=1fe4e2146a' },
       { id: 'ungol', title: 'Ungol', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/6/6/4/6/6/1266466-ungol-0-1000-0-1500-crop.jpg?v=966da6f751' },
       { id: 'ladyguard', title: 'Lady Guard', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/5/0/8/5/1/1150851-lady-guard-0-1000-0-1500-crop.jpg?v=3b9b69f1b8' },
       { id: 'kaulayaw', title: 'Kaulayaw', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/1/8/4/0/0/3/1184003-kaulayaw-0-1000-0-1500-crop.jpg?v=05a43aabe2' },
@@ -322,7 +351,7 @@
 
   const modal = document.getElementById('video-modal');
 const modalTitle = document.getElementById('modal-title');
-// const modalVideo = document.getElementById('modal-video');
+
 const modalSource = document.getElementById('modal-source');
 const closeModal = document.getElementById('close-modal');
 
@@ -330,7 +359,7 @@ const closeModal = document.getElementById('close-modal');
 function openModal(video) {
   modalTitle.textContent = video.title;
   modalSource.src = video.videoUrl;
-  // modalVideo.load();
+  
   modal.style.display = "block";
 }
 
