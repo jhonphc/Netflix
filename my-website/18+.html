@@ -88,6 +88,44 @@
         background-color: #ccc;
         cursor: not-allowed;
     }
+/* modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+  background-color: #111;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 800px;
+  color: white;
+  text-align: center;
+}
+
+.modal-content video {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  margin-top: 10px;
+}
+
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+    
 </style>
   <!-- Inlined CSS END -->
 
@@ -125,6 +163,16 @@
 <!-- End Navigation Bar -->
 
 <!-- Content start -->
+<div class="modal" id="video-modal">
+  <div class="modal-content">
+    <span class="close" id="close-modal">&times;</span>
+    <h2 id="modal-title"></h2>
+    <video id="modal-video" controls>
+      <source id="modal-source" src="" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
 
 <main>
   <div class="video-thumbnails" id="video-thumbnails">
@@ -140,7 +188,7 @@
 
 <script>
   const videoData = [
-      { id: 'walker', title: 'Walker', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/6/8/2/1205682-walker-2025-0-1000-0-1500-crop.jpg?v=92123f9e6f' },
+      { id: 'walker', title: 'Walker', videoUrl: "https://drive.google.com/file/d/1vWxHVqvmOQnO-nAf4UZYln9KFo-cQmi7/preview" thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/6/8/2/1205682-walker-2025-0-1000-0-1500-crop.jpg?v=92123f9e6f' },
       { id: 'pilya', title: 'Pilya', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/3/1/9/4/7/1231947-pilya-2024-0-1000-0-1500-crop.jpg?v=7cd1e6b8ff' },
       { id: 'paluwagan', title: 'Paluwagan', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/3/1205703-paluwagan-0-1000-0-1500-crop.jpg?v=58fc0d756c' },
       { id: 'privatetutor', title: 'Private Tutor', thumbnail: 'https://a.ltrbxd.com/resized/film-poster/1/2/0/5/7/0/2/1205702-private-tutor-0-1000-0-1500-crop.jpg?v=5c49f502f6' },
@@ -291,6 +339,36 @@
       currentPage = page;
       showPage(currentPage);
   }
+  
+const modal = document.getElementById('video-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalVideo = document.getElementById('modal-video');
+const modalSource = document.getElementById('modal-source');
+const closeModal = document.getElementById('close-modal');
+
+// Open modal when thumbnail is clicked
+function openModal(video) {
+  modalTitle.textContent = video.title;
+  modalSource.src = video.videoUrl;
+  modalVideo.load();
+  modal.style.display = "block";
+}
+
+// Close modal
+closeModal.onclick = function () {
+  modal.style.display = "none";
+  modalVideo.pause();
+};
+
+// Close modal when clicking outside the modal content
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+    modalVideo.pause();
+  }
+};
+
+  
 
   document.getElementById('search-bar').addEventListener('keyup', function(event) {
       const searchTerm = event.target.value.toLowerCase();
