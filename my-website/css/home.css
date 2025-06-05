@@ -420,3 +420,36 @@
   outline: none;
   border: 2px solid #ff0000;
 }
+
+
+/* floating icon */
+
+
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #e50914;
+  color: white;
+  font-size: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 56px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.floating-btn:hover {
+  background-color: #b00610;
+}
+
+@media screen and (min-width: 768px) {
+  /* Optional: Hide on desktop */
+  .floating-btn {
+    display: none;
+  }
+}
