@@ -424,7 +424,6 @@
 
 /* floating icon */
 
-
 .floating-download {
   position: fixed;
   bottom: 20px;
@@ -452,12 +451,10 @@
   display: block;
 }
 
-
-
-
-@media screen and (min-width: 768px) {
-  /* Optional: Hide on desktop */
+/* Hide on mobile screens */
+@media screen and (max-width: 768px) {
   .floating-download {
     display: none;
   }
 }
+
