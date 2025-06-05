@@ -425,7 +425,7 @@
 /* floating icon */
 
 
-.floating-btn {
+.floating-download {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -437,15 +437,16 @@
   border-radius: 50%;
   text-align: center;
   line-height: 56px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
   text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
-.floating-btn:hover {
+.floating-download:hover {
   background-color: #b00610;
 }
+
 
 @media screen and (min-width: 768px) {
   /* Optional: Hide on desktop */
