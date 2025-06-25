@@ -13,6 +13,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   
   <script defer src="js/home.js"></script>
+
+  <script>
+  document.addEventListener('contextmenu', event => event.preventDefault());
+  </script>
+  <script>
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || 
+        (e.ctrlKey && e.key === 'U')) {
+      e.preventDefault();
+    }
+  });
+  </script>
+
+  
   
 <!-- jhonflix scripts  here popads -->
 <!-- <script type="text/javascript" data-cfasync="false">
