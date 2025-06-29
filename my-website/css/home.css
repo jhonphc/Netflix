@@ -1,3 +1,4 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -102,20 +103,17 @@ body {
   z-index: 2;
 }
 
-/* Expanded vertical layout */
 .list.expanded {
   flex-wrap: wrap;
   overflow-x: hidden;
   justify-content: flex-start;
 }
 
-/* Adjust image size in expanded view */
 .list.expanded img {
-  width: calc(12.5% - 10px); /* 8 columns */
+  width: calc(12.5% - 10px);
   margin-bottom: 10px;
 }
 
-/* See more button */
 .see-more-btn {
   margin: 10px auto 30px auto;
   display: block;
@@ -133,7 +131,6 @@ body {
   background: #b00610;
 }
 
-/* Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -193,13 +190,11 @@ body {
   font-size: 24px;
 }
 
-/* Server selector */
 .server-selector {
   margin: 15px 0;
   text-align: left;
 }
 
-/* Search Modal */
 .search-modal {
   position: fixed;
   top: 0;
@@ -244,7 +239,6 @@ body {
   font-size: 30px;
 }
 
-/* Floating download button */
 .floating-download {
   position: fixed;
   bottom: 20px;
@@ -272,7 +266,6 @@ body {
   display: block;
 }
 
-/* Footer */
 .footer {
   background: #000;
   color: #ccc;
@@ -307,10 +300,28 @@ body {
 /* Responsive Styles */
 @media (max-width: 768px) {
   .nav-links {
-    flex-direction: row;
+    display: none;
+    flex-direction: column;
+    background-color: #222;
+    position: absolute;
+    top: 60px;
+    left: 0;
     width: 100%;
-    gap: 10px;
-    margin-top: 10px;
+    padding: 15px;
+    z-index: 999;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
   }
 
   .list img {
@@ -333,33 +344,19 @@ body {
   .floating-download {
     display: none;
   }
+}
 
+@media (min-width: 769px) {
   .hamburger {
-    display: block;
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
-  }
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-  #nav-links {
     display: none;
-    flex-direction: column;
-    background-color: #222;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    padding: 15px;
-    z-index: 999;
   }
 
-  #nav-links.show {
-    display: flex;
+  .nav-links {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
   }
 }
 
