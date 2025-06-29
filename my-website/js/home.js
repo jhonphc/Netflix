@@ -2,7 +2,6 @@ const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/original';
 let currentItem;
-
 const currentYear = new Date().getFullYear();
 
 function populateYearSelect(selectId, minYear = 2000) {
@@ -13,7 +12,6 @@ function populateYearSelect(selectId, minYear = 2000) {
   allYearsOption.textContent = 'All Years';
   allYearsOption.selected = true;
   select.appendChild(allYearsOption);
-
   for (let year = currentYear; year >= minYear; year--) {
     const option = document.createElement('option');
     option.value = year;
@@ -99,6 +97,10 @@ function displayList(items, containerId) {
     const img = document.createElement('img');
     img.src = `${IMG_URL}${item.poster_path}`;
     img.alt = item.title || item.name;
+    if (item.adult) {
+      img.style.border = '2px solid red';
+      img.title = 'Adult Content';
+    }
     img.onclick = () => showDetails(item);
     container.appendChild(img);
   });
@@ -143,6 +145,22 @@ window.addEventListener('keydown', function (e) {
   }
 });
 
+document.addEventListener('click', function (e) {
+  const allowed = [
+    'movies-list', 'tvshows-list', 'anime-list', 'vivamax-list',
+    'modal', 'search-modal', 'search-input',
+    ...Array.from(document.querySelectorAll('.see-more-btn')).map(btn => btn.id),
+    ...Array.from(document.querySelectorAll('.year-selector')).map(sel => sel.id)
+  ];
+
+  const isInside = allowed.some(id => {
+    const el = document.getElementById(id);
+    return el && el.contains(e.target);
+  });
+
+  if (!isInside) collapseAllSections();
+});
+
 function openSearchModal() {
   document.getElementById('search-modal').style.display = 'flex';
   document.getElementById('search-input').focus();
@@ -162,7 +180,6 @@ async function searchTMDB() {
 
   const res = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${query}`);
   const data = await res.json();
-
   const container = document.getElementById('search-results');
   container.innerHTML = '';
   data.results.forEach(item => {
@@ -203,10 +220,7 @@ async function init() {
   displayList(vivamax, 'vivamax-list');
 }
 
-let moviePage = 1;
-let tvPage = 1;
-let animePage = 1;
-let vivamaxPage = 1;
+let moviePage = 1, tvPage = 1, animePage = 1, vivamaxPage = 1;
 
 document.getElementById('see-more-movies').addEventListener('click', async () => {
   const year = document.getElementById('movie-year-select').value;
