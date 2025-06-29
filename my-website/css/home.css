@@ -1,4 +1,4 @@
-/* Updated Full CSS Block */
+/* Updated CSS */
 
 * {
   margin: 0;
@@ -54,14 +54,13 @@ body {
   overflow-x: auto;
   gap: 10px;
   padding-bottom: 10px;
-  transition: all 0.3s ease;
 }
 
 .list.expanded {
   flex-wrap: wrap;
   overflow-x: unset;
-  justify-content: flex-start;
-  max-height: unset;
+  justify-content: start;
+  max-height: none;
 }
 
 .list img {
@@ -92,10 +91,14 @@ body {
 }
 
 .pagination-controls {
-  display: flex;
+  display: none;
   justify-content: center;
   gap: 10px;
   margin-top: 15px;
+}
+
+.row.expanded .pagination-controls {
+  display: flex;
 }
 
 .pagination-controls button {
@@ -128,9 +131,5 @@ body {
   .filter {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .list.expanded img {
-    width: 45%;
   }
 }
