@@ -115,12 +115,12 @@ body {
   gap: 10px;
 }
 .list.vertical {
-  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  overflow-x: unset;
-  gap: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: none;
 }
+
 .list img {
   width: 150px;
   border-radius: 5px;
