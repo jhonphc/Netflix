@@ -312,9 +312,7 @@ body {
     gap: 10px;
     margin-top: 10px;
   }
-.hamburger {
-    display: block;
-  }
+
   .list img {
     width: 120px;
   }
@@ -344,7 +342,10 @@ body {
     color: white;
     cursor: pointer;
   }
-
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
   #nav-links {
     display: none;
     flex-direction: column;
