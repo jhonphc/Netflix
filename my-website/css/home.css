@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: Arial, sans-serif;
   background: #111;
@@ -33,6 +34,11 @@ body {
   margin: 0 5px;
 }
 
+.jf a {
+  color: #ff0000;
+  text-decoration: none;
+}
+
 .search-toggle {
   background: none;
   border: none;
@@ -56,11 +62,6 @@ body {
   padding: 20px;
 }
 
-.jf a {
-  color: #ff0000;
-  text-decoration: none;
-}
-
 .banner h1 {
   background: rgba(0, 0, 0, 0.7);
   padding: 10px;
@@ -74,19 +75,24 @@ body {
   margin-bottom: 10px;
 }
 
+.filter {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .list {
   display: flex;
   overflow-x: auto;
   gap: 10px;
-  scroll-behavior: smooth;
+  transition: all 0.3s ease;
 }
 
 .list img {
   width: 150px;
-  flex-shrink: 0;
-  margin-right: 0;
-  cursor: pointer;
   border-radius: 5px;
+  cursor: pointer;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
@@ -96,13 +102,17 @@ body {
   z-index: 2;
 }
 
-/* EXPANDED: vertical layout for See More */
+/* Expanded vertical layout */
 .list.expanded {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 15px;
-  overflow-x: unset;
-  margin-top: 20px;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  justify-content: flex-start;
+}
+
+/* Adjust image size in expanded view */
+.list.expanded img {
+  width: calc(12.5% - 10px); /* 8 columns */
+  margin-bottom: 10px;
 }
 
 /* See more button */
@@ -123,6 +133,7 @@ body {
   background: #b00610;
 }
 
+/* Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -182,11 +193,13 @@ body {
   font-size: 24px;
 }
 
+/* Server selector */
 .server-selector {
   margin: 15px 0;
   text-align: left;
 }
 
+/* Search Modal */
 .search-modal {
   position: fixed;
   top: 0;
@@ -231,7 +244,7 @@ body {
   font-size: 30px;
 }
 
-/* Floating Download Button */
+/* Floating download button */
 .floating-download {
   position: fixed;
   bottom: 20px;
@@ -257,40 +270,6 @@ body {
 
 .floating-download svg {
   display: block;
-}
-
-/* Hide on mobile */
-@media screen and (max-width: 768px) {
-  .floating-download {
-    display: none;
-  }
-}
-
-/* Filter bar layout */
-.filter {
-  margin: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.filter label {
-  margin-right: 10px;
-  font-size: 1rem;
-}
-
-#year-select {
-  padding: 5px;
-  border-radius: 5px;
-  border: none;
-  background-color: #333;
-  color: #fff;
-  font-size: 1rem;
-}
-
-#year-select:focus {
-  outline: none;
-  border: 2px solid #ff0000;
 }
 
 /* Footer */
@@ -325,31 +304,43 @@ body {
   color: #fff;
 }
 
-/* Responsive Footer */
-@media (max-width: 600px) {
-  .footer-content {
-    font-size: 14px;
-  }
-
-  .footer-links {
-    flex-direction: row;
-    gap: 8px;
-  }
-}
-
-/* Hamburger Menu */
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-}
-
+/* Responsive Styles */
 @media (max-width: 768px) {
+  .nav-links {
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .list img {
+    width: 120px;
+  }
+
+  .list.expanded img {
+    width: calc(50% - 10px);
+  }
+
+  .modal-body img {
+    width: 40%;
+  }
+
+  .search-modal input {
+    width: 90%;
+    margin-top: 50px;
+  }
+
+  .floating-download {
+    display: none;
+  }
+
   .hamburger {
     display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
   }
 
   #nav-links {
@@ -367,59 +358,6 @@ body {
   #nav-links.show {
     display: flex;
   }
-
-  #nav-links a,
-  #nav-links .search-bar {
-    width: 100%;
-    margin: 10px 0;
-  }
-
-  .banner {
-    height: 30vh;
-  }
-
-  .modal-body {
-    align-items: center;
-  }
-
-  .modal-body img {
-    width: 40%;
-  }
-
-  .modal-text {
-    text-align: center;
-  }
-
-  .list img {
-    width: 120px;
-  }
-
-  .search-modal input {
-    margin-top: 50px;
-    width: 90%;
-  }
-
-  .search-modal .results {
-    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
-    overflow-x: auto;
-    padding: 10px 0;
-  }
-}
-
-@media (min-width: 769px) {
-  #nav-links {
-    display: flex !important;
-    position: static;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-  }
-
-  #nav-links a,
-  #nav-links .search-bar {
-    width: auto;
-    margin: 0 5px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -435,10 +373,6 @@ body {
   .modal-content {
     width: 95%;
     padding: 15px;
-  }
-
-  .modal-body img {
-    width: 40%;
   }
 
   .search-modal .close {
