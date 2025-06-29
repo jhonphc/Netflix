@@ -4,7 +4,7 @@ const IMG_URL = 'https://image.tmdb.org/t/p/original';
 let currentItem;
 
 const currentYear = new Date().getFullYear();
-const pageCount = { movie: 1, tv: 1, anime: 1 };
+const startYear = 2000;
 
 function populateYearSelect(selectId, minYear = 2000) {
   const select = document.getElementById(selectId);
@@ -14,6 +14,7 @@ function populateYearSelect(selectId, minYear = 2000) {
   allYearsOption.textContent = 'All Years';
   allYearsOption.selected = true;
   select.appendChild(allYearsOption);
+
   for (let year = currentYear; year >= minYear; year--) {
     const option = document.createElement('option');
     option.value = year;
@@ -22,7 +23,26 @@ function populateYearSelect(selectId, minYear = 2000) {
   }
 }
 
-async function fetchMoviesByYearPaged(year, page = 1) {
+async function fetchTrending(type) {
+  const res = await fetch(`${BASE_URL}/trending/${type}/week?api_key=${API_KEY}`);
+  const data = await res.json();
+  return data.results;
+}
+
+async function fetchTrendingAnime() {
+  let allResults = [];
+  for (let page = 1; page <= 3; page++) {
+    const res = await fetch(`${BASE_URL}/trending/tv/week?api_key=${API_KEY}&page=${page}`);
+    const data = await res.json();
+    const filtered = data.results.filter(item =>
+      item.original_language === 'ja' && item.genre_ids.includes(16)
+    );
+    allResults = allResults.concat(filtered);
+  }
+  return allResults;
+}
+
+async function fetchMoviesByYear(year, page = 1) {
   const url = year === 'all'
     ? `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`
     : `${BASE_URL}/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc&primary_release_year=${year}&page=${page}`;
@@ -31,7 +51,7 @@ async function fetchMoviesByYearPaged(year, page = 1) {
   return data.results.map(item => ({ ...item, media_type: 'movie' }));
 }
 
-async function fetchTVByYearPaged(year, page = 1) {
+async function fetchTVByYear(year, page = 1) {
   const url = year === 'all'
     ? `${BASE_URL}/tv/popular?api_key=${API_KEY}&page=${page}`
     : `${BASE_URL}/discover/tv?api_key=${API_KEY}&sort_by=popularity.desc&first_air_date_year=${year}&page=${page}`;
@@ -40,16 +60,33 @@ async function fetchTVByYearPaged(year, page = 1) {
   return data.results.map(item => ({ ...item, media_type: 'tv' }));
 }
 
-async function fetchAnimeByYearPaged(year, page = 1) {
-  const url = `${BASE_URL}/discover/tv?api_key=${API_KEY}&with_original_language=ja&with_genres=16&sort_by=popularity.desc&page=${page}` + (year !== 'all' ? `&first_air_date_year=${year}` : '');
+async function fetchAnimeByYear(year, page = 1) {
+  const url = `${BASE_URL}/discover/tv?api_key=${API_KEY}&with_original_language=ja&with_genres=16&sort_by=popularity.desc&first_air_date_year=${year}&page=${page}`;
   const res = await fetch(url);
   const data = await res.json();
   return data.results.map(item => ({ ...item, media_type: 'tv' }));
 }
 
+function toggleMenu() {
+  document.getElementById('nav-links').classList.toggle('show');
+}
+
+function toggleSearchBar() {
+  const searchBar = document.getElementById('search-bar');
+  searchBar.classList.toggle('hidden');
+  if (!searchBar.classList.contains('hidden')) {
+    searchBar.focus();
+  }
+}
+
+function displayBanner(item) {
+  document.getElementById('banner').style.backgroundImage = `url(${IMG_URL}${item.backdrop_path})`;
+  document.getElementById('banner-title').textContent = item.title || item.name;
+  banner.onclick = () => showDetails(item);
+}
+
 function displayList(items, containerId) {
   const container = document.getElementById(containerId);
-  container.innerHTML = '';
   items.forEach(item => {
     const img = document.createElement('img');
     img.src = `${IMG_URL}${item.poster_path}`;
@@ -71,15 +108,17 @@ function showDetails(item) {
 
 function changeServer() {
   const server = document.getElementById('server').value;
-  const type = currentItem.media_type === 'movie' ? 'movie' : 'tv';
-  let embedURL = '';
-  if (server === 'vidsrc.cc') {
+  const type = currentItem.media_type === "movie" ? "movie" : "tv";
+  let embedURL = "";
+
+  if (server === "vidsrc.cc") {
     embedURL = `https://vidsrc.cc/v2/embed/${type}/${currentItem.id}`;
-  } else if (server === 'vidsrc.me') {
+  } else if (server === "vidsrc.me") {
     embedURL = `https://vidsrc.net/embed/${type}/?tmdb=${currentItem.id}`;
-  } else if (server === 'player.videasy.net') {
+  } else if (server === "player.videasy.net") {
     embedURL = `https://player.videasy.net/${type}/${currentItem.id}`;
   }
+
   document.getElementById('modal-video').src = embedURL;
 }
 
@@ -88,10 +127,17 @@ function closeModal() {
   document.getElementById('modal-video').src = '';
 }
 
-document.addEventListener('keydown', function (e) {
+window.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
     closeSearchModal();
     closeModal();
+    collapseAllSections();
+  }
+});
+
+document.addEventListener('click', function (e) {
+  if (!e.target.closest('.row') && !e.target.closest('.see-more-btn')) {
+    collapseAllSections();
   }
 });
 
@@ -111,8 +157,10 @@ async function searchTMDB() {
     document.getElementById('search-results').innerHTML = '';
     return;
   }
+
   const res = await fetch(`${BASE_URL}/search/multi?api_key=${API_KEY}&query=${query}`);
   const data = await res.json();
+
   const container = document.getElementById('search-results');
   container.innerHTML = '';
   data.results.forEach(item => {
@@ -128,24 +176,14 @@ async function searchTMDB() {
   });
 }
 
-function toggleMenu() {
-  document.getElementById('nav-links').classList.toggle('show');
-}
-
-function displayBanner(item) {
-  document.getElementById('banner').style.backgroundImage = `url(${IMG_URL}${item.backdrop_path})`;
-  document.getElementById('banner-title').textContent = item.title || item.name;
-  banner.onclick = () => showDetails(item);
-}
-
 async function init() {
   populateYearSelect('movie-year-select');
   populateYearSelect('tvshow-year-select');
   populateYearSelect('anime-year-select');
 
-  const movies = await fetchMoviesByYearPaged('all', 1);
-  const tvShows = await fetchTVByYearPaged('all', 1);
-  const anime = await fetchAnimeByYearPaged('all', 1);
+  const movies = await fetchTrending('movie');
+  const tvShows = await fetchTrending('tv');
+  const anime = await fetchTrendingAnime();
 
   displayBanner(movies[Math.floor(Math.random() * movies.length)]);
   displayList(movies, 'movies-list');
@@ -153,60 +191,62 @@ async function init() {
   displayList(anime, 'anime-list');
 }
 
-async function handleSeeMore(type) {
-  const containerId = {
-    movie: 'movies-list',
-    tv: 'tvshows-list',
-    anime: 'anime-list'
-  }[type];
+let moviePage = 1;
+let tvPage = 1;
+let animePage = 1;
 
-  const yearSelectId = {
-    movie: 'movie-year-select',
-    tv: 'tvshow-year-select',
-    anime: 'anime-year-select'
-  }[type];
-
-  const fetchFn = {
-    movie: fetchMoviesByYearPaged,
-    tv: fetchTVByYearPaged,
-    anime: fetchAnimeByYearPaged
-  }[type];
-
-  const year = document.getElementById(yearSelectId).value;
-  const page = ++pageCount[type];
-  const items = await fetchFn(year, page);
-
-  const container = document.getElementById(containerId);
-  items.forEach(item => {
-    const img = document.createElement('img');
-    img.src = `${IMG_URL}${item.poster_path}`;
-    img.alt = item.title || item.name;
-    img.onclick = () => showDetails(item);
-    container.appendChild(img);
+function collapseAllSections() {
+  ['movies-list', 'tvshows-list', 'anime-list'].forEach(id => {
+    const container = document.getElementById(id);
+    container.classList.remove('expanded');
   });
-
-  container.classList.add('expanded');
 }
 
-document.getElementById('see-more-movies').addEventListener('click', () => handleSeeMore('movie'));
-document.getElementById('see-more-tv').addEventListener('click', () => handleSeeMore('tv'));
-document.getElementById('see-more-anime').addEventListener('click', () => handleSeeMore('anime'));
+document.getElementById('see-more-movies').addEventListener('click', async () => {
+  const year = document.getElementById('movie-year-select').value;
+  moviePage++;
+  const more = await fetchMoviesByYear(year, moviePage);
+  displayList(more, 'movies-list');
+  document.getElementById('movies-list').classList.add('expanded');
+});
+
+document.getElementById('see-more-tv').addEventListener('click', async () => {
+  const year = document.getElementById('tvshow-year-select').value;
+  tvPage++;
+  const more = await fetchTVByYear(year, tvPage);
+  displayList(more, 'tvshows-list');
+  document.getElementById('tvshows-list').classList.add('expanded');
+});
+
+document.getElementById('see-more-anime').addEventListener('click', async () => {
+  const year = document.getElementById('anime-year-select').value;
+  animePage++;
+  const more = await fetchAnimeByYear(year, animePage);
+  displayList(more, 'anime-list');
+  document.getElementById('anime-list').classList.add('expanded');
+});
 
 document.getElementById('movie-year-select').addEventListener('change', async (e) => {
-  pageCount.movie = 1;
-  const movies = await fetchMoviesByYearPaged(e.target.value, 1);
+  moviePage = 1;
+  const movies = await fetchMoviesByYear(e.target.value);
+  const container = document.getElementById('movies-list');
+  container.innerHTML = '';
   displayList(movies, 'movies-list');
 });
 
 document.getElementById('tvshow-year-select').addEventListener('change', async (e) => {
-  pageCount.tv = 1;
-  const tv = await fetchTVByYearPaged(e.target.value, 1);
+  tvPage = 1;
+  const tv = await fetchTVByYear(e.target.value);
+  const container = document.getElementById('tvshows-list');
+  container.innerHTML = '';
   displayList(tv, 'tvshows-list');
 });
 
 document.getElementById('anime-year-select').addEventListener('change', async (e) => {
-  pageCount.anime = 1;
-  const anime = await fetchAnimeByYearPaged(e.target.value, 1);
+  animePage = 1;
+  const anime = await fetchAnimeByYear(e.target.value);
+  const container = document.getElementById('anime-list');
+  container.innerHTML = '';
   displayList(anime, 'anime-list');
 });
 
