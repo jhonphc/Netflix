@@ -458,3 +458,22 @@
   }
 }
 
+
+/* see more button */
+
+.see-more-btn {
+  margin: 10px auto 30px auto;
+  display: block;
+  background: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.see-more-btn:hover {
+  background: #b00610;
+}
