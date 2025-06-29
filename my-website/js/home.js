@@ -4,7 +4,6 @@ const IMG_URL = 'https://image.tmdb.org/t/p/original';
 let currentItem;
 
 const currentYear = new Date().getFullYear();
-const startYear = 2000;
 
 function populateYearSelect(selectId, minYear = 2000) {
   const select = document.getElementById(selectId);
@@ -65,6 +64,15 @@ async function fetchAnimeByYear(year, page = 1) {
   const res = await fetch(url);
   const data = await res.json();
   return data.results.map(item => ({ ...item, media_type: 'tv' }));
+}
+
+async function fetchVivamaxByYear(year, page = 1) {
+  const url = year === 'all'
+    ? `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_origin_country=PH&with_original_language=tl&page=${page}`
+    : `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_origin_country=PH&with_original_language=tl&primary_release_year=${year}&page=${page}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  return data.results.map(item => ({ ...item, media_type: 'movie' }));
 }
 
 function toggleMenu() {
@@ -188,27 +196,13 @@ async function searchTMDB() {
   });
 }
 
-async function init() {
-  populateYearSelect('movie-year-select');
-  populateYearSelect('tvshow-year-select');
-  populateYearSelect('anime-year-select');
-
-  const movies = await fetchTrending('movie');
-  const tvShows = await fetchTrending('tv');
-  const anime = await fetchTrendingAnime();
-
-  displayBanner(movies[Math.floor(Math.random() * movies.length)]);
-  displayList(movies, 'movies-list');
-  displayList(tvShows, 'tvshows-list');
-  displayList(anime, 'anime-list');
-}
-
 let moviePage = 1;
 let tvPage = 1;
 let animePage = 1;
+let vivamaxPage = 1;
 
 function collapseAllSections() {
-  ['movies-list', 'tvshows-list', 'anime-list'].forEach(id => {
+  ['movies-list', 'tvshows-list', 'anime-list', 'vivamax-list'].forEach(id => {
     const container = document.getElementById(id);
     container.classList.remove('expanded');
   });
@@ -238,6 +232,14 @@ document.getElementById('see-more-anime').addEventListener('click', async () => 
   document.getElementById('anime-list').classList.add('expanded');
 });
 
+document.getElementById('see-more-vivamax').addEventListener('click', async () => {
+  const year = document.getElementById('vivamax-year-select').value;
+  vivamaxPage++;
+  const more = await fetchVivamaxByYear(year, vivamaxPage);
+  displayList(more, 'vivamax-list');
+  document.getElementById('vivamax-list').classList.add('expanded');
+});
+
 document.getElementById('movie-year-select').addEventListener('change', async (e) => {
   moviePage = 1;
   const movies = await fetchMoviesByYear(e.target.value);
@@ -261,5 +263,31 @@ document.getElementById('anime-year-select').addEventListener('change', async (e
   container.innerHTML = '';
   displayList(anime, 'anime-list');
 });
+
+document.getElementById('vivamax-year-select').addEventListener('change', async (e) => {
+  vivamaxPage = 1;
+  const vivamax = await fetchVivamaxByYear(e.target.value);
+  const container = document.getElementById('vivamax-list');
+  container.innerHTML = '';
+  displayList(vivamax, 'vivamax-list');
+});
+
+async function init() {
+  populateYearSelect('movie-year-select');
+  populateYearSelect('tvshow-year-select');
+  populateYearSelect('anime-year-select');
+  populateYearSelect('vivamax-year-select');
+
+  const movies = await fetchTrending('movie');
+  const tvShows = await fetchTrending('tv');
+  const anime = await fetchTrendingAnime();
+  const vivamax = await fetchVivamaxByYear('all');
+
+  displayBanner(movies[Math.floor(Math.random() * movies.length)]);
+  displayList(movies, 'movies-list');
+  displayList(tvShows, 'tvshows-list');
+  displayList(anime, 'anime-list');
+  displayList(vivamax, 'vivamax-list');
+}
 
 init();
