@@ -287,3 +287,20 @@ document.getElementById('vivamax-year-select').addEventListener('change', async 
 });
 
 init();
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const vmaxLink = document.querySelector('a[href="#vivamax-section"]');
+  const vivamaxSection = document.getElementById('vivamax-section');
+
+  vmaxLink.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    // Reveal the section
+    vivamaxSection.style.display = 'block';
+
+    // Scroll into view smoothly
+    vivamaxSection.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
