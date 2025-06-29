@@ -288,7 +288,7 @@ document.getElementById('vivamax-year-select').addEventListener('change', async 
 
 init();
 
-<script>
+
 document.addEventListener('DOMContentLoaded', () => {
   const vmaxLink = document.querySelector('a[href="#vivamax-section"]');
   const vivamaxSection = document.getElementById('vivamax-section');
@@ -303,4 +303,4 @@ document.addEventListener('DOMContentLoaded', () => {
     vivamaxSection.scrollIntoView({ behavior: 'smooth' });
   });
 });
-</script>
+
