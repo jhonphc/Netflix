@@ -136,9 +136,21 @@ window.addEventListener('keydown', function (e) {
 });
 
 document.addEventListener('click', function (e) {
-  if (!e.target.closest('.row') && !e.target.closest('.see-more-btn')) {
-    collapseAllSections();
+  const movieRow = document.querySelector('.row.movies');
+  const tvRow = document.querySelector('.row.tvshows');
+  const animeRow = document.querySelector('.row.anime');
+  const seeMoreButtons = document.querySelectorAll('.see-more-btn');
+
+  if (
+    movieRow?.contains(e.target) ||
+    tvRow?.contains(e.target) ||
+    animeRow?.contains(e.target) ||
+    Array.from(seeMoreButtons).some(btn => btn.contains(e.target))
+  ) {
+    return;
   }
+
+  collapseAllSections();
 });
 
 function openSearchModal() {
