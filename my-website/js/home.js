@@ -226,3 +226,70 @@ init();
 populateYearSelect('movie-year-select');
 populateYearSelect('tvshow-year-select');
 populateYearSelect('anime-year-select');
+
+
+// see more
+
+// Fetch more movies (popular, multiple pages)
+async function fetchMoreMovies(page = 1) {
+  const res = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`);
+  const data = await res.json();
+  return data.results.map(item => ({ ...item, media_type: 'movie' }));
+}
+
+// Fetch more TV shows (popular)
+async function fetchMoreTV(page = 1) {
+  const res = await fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}&page=${page}`);
+  const data = await res.json();
+  return data.results.map(item => ({ ...item, media_type: 'tv' }));
+}
+
+// Fetch more anime (Japanese animation) - TV shows with genre 16 (Animation) + language Japanese
+async function fetchMoreAnime(page = 1) {
+  const res = await fetch(`${BASE_URL}/discover/tv?api_key=${API_KEY}&with_original_language=ja&with_genres=16&sort_by=popularity.desc&page=${page}`);
+  const data = await res.json();
+  return data.results.map(item => ({ ...item, media_type: 'tv' }));
+}
+
+let moviePage = 1;
+let tvPage = 1;
+let animePage = 1;
+
+document.getElementById('see-more-movies').addEventListener('click', async () => {
+  moviePage++;
+  const moreMovies = await fetchMoreMovies(moviePage);
+  const container = document.getElementById('movies-list');
+  moreMovies.forEach(item => {
+    const img = document.createElement('img');
+    img.src = `${IMG_URL}${item.poster_path}`;
+    img.alt = item.title || item.name;
+    img.onclick = () => showDetails(item);
+    container.appendChild(img);
+  });
+});
+
+document.getElementById('see-more-tv').addEventListener('click', async () => {
+  tvPage++;
+  const moreTV = await fetchMoreTV(tvPage);
+  const container = document.getElementById('tvshows-list');
+  moreTV.forEach(item => {
+    const img = document.createElement('img');
+    img.src = `${IMG_URL}${item.poster_path}`;
+    img.alt = item.title || item.name;
+    img.onclick = () => showDetails(item);
+    container.appendChild(img);
+  });
+});
+
+document.getElementById('see-more-anime').addEventListener('click', async () => {
+  animePage++;
+  const moreAnime = await fetchMoreAnime(animePage);
+  const container = document.getElementById('anime-list');
+  moreAnime.forEach(item => {
+    const img = document.createElement('img');
+    img.src = `${IMG_URL}${item.poster_path}`;
+    img.alt = item.title || item.name;
+    img.onclick = () => showDetails(item);
+    container.appendChild(img);
+  });
+});
