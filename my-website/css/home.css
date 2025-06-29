@@ -312,7 +312,9 @@ body {
     gap: 10px;
     margin-top: 10px;
   }
-
+.hamburger {
+    display: block;
+  }
   .list img {
     width: 120px;
   }
