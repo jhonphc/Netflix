@@ -3,7 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: Arial, sans-serif;
   background: #111;
@@ -34,55 +33,6 @@ body {
   margin: 0 5px;
 }
 
-/* Hamburger menu */
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  #nav-links {
-    display: none;
-    flex-direction: column;
-    background-color: #222;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    padding: 15px;
-    z-index: 999;
-  }
-
-  #nav-links.show {
-    display: flex;
-  }
-
-  #nav-links a,
-  #nav-links .search-bar {
-    width: 100%;
-    margin: 10px 0;
-  }
-}
-
-@media (min-width: 769px) {
-  #nav-links {
-    display: flex !important;
-    position: static;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-  }
-}
-
-/* Search icon button */
 .search-toggle {
   background: none;
   border: none;
@@ -98,7 +48,6 @@ body {
   border: none;
 }
 
-/* Banner */
 .banner {
   height: 50vh;
   background-size: cover;
@@ -107,17 +56,16 @@ body {
   padding: 20px;
 }
 
-.banner h1 {
-  background: rgba(0, 0, 0, 0.7);
-  padding: 10px;
-}
-
 .jf a {
   color: #ff0000;
   text-decoration: none;
 }
 
-/* Filter heading + year select */
+.banner h1 {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+}
+
 .row {
   margin: 20px;
 }
@@ -126,17 +74,17 @@ body {
   margin-bottom: 10px;
 }
 
-/* 🎯 KEY CHANGE: Grid layout for content list */
 .list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 15px;
-  overflow-x: unset;
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  scroll-behavior: smooth;
 }
 
-/* Poster images */
 .list img {
-  width: 100%;
+  width: 150px;
+  flex-shrink: 0;
+  margin-right: 0;
   cursor: pointer;
   border-radius: 5px;
   transition: transform 0.3s ease, filter 0.3s ease;
@@ -148,7 +96,33 @@ body {
   z-index: 2;
 }
 
-/* Modal popup */
+/* EXPANDED: vertical layout for See More */
+.list.expanded {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  overflow-x: unset;
+  margin-top: 20px;
+}
+
+/* See more button */
+.see-more-btn {
+  margin: 10px auto 30px auto;
+  display: block;
+  background: #e50914;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.see-more-btn:hover {
+  background: #b00610;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -213,7 +187,6 @@ body {
   text-align: left;
 }
 
-/* Search Modal */
 .search-modal {
   position: fixed;
   top: 0;
@@ -258,6 +231,68 @@ body {
   font-size: 30px;
 }
 
+/* Floating Download Button */
+.floating-download {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 64px;
+  height: 64px;
+  background-color: #e50914;
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  z-index: 9999;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.floating-download:hover {
+  background-color: #b00610;
+  transform: scale(1.1);
+}
+
+.floating-download svg {
+  display: block;
+}
+
+/* Hide on mobile */
+@media screen and (max-width: 768px) {
+  .floating-download {
+    display: none;
+  }
+}
+
+/* Filter bar layout */
+.filter {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter label {
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+#year-select {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  font-size: 1rem;
+}
+
+#year-select:focus {
+  outline: none;
+  border: 2px solid #ff0000;
+}
+
 /* Footer */
 .footer {
   background: #000;
@@ -290,86 +325,125 @@ body {
   color: #fff;
 }
 
-/* Filter row */
-.filter {
-  margin: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.filter label {
-  margin-right: 10px;
-  font-size: 1rem;
-}
-
-#year-select {
-  padding: 5px;
-  border-radius: 5px;
-  border: none;
-  background-color: #333;
-  color: #fff;
-  font-size: 1rem;
-}
-
-#year-select:focus {
-  outline: none;
-  border: 2px solid #ff0000;
-}
-
-/* Floating download button */
-.floating-download {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 64px;
-  height: 64px;
-  background-color: #e50914;
-  color: white;
-  border-radius: 50%;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  z-index: 9999;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.floating-download:hover {
-  background-color: #b00610;
-  transform: scale(1.1);
-}
-
-.floating-download svg {
-  display: block;
-}
-
-/* Hide on mobile screens */
-@media screen and (max-width: 768px) {
-  .floating-download {
-    display: none;
+/* Responsive Footer */
+@media (max-width: 600px) {
+  .footer-content {
+    font-size: 14px;
   }
 
-  .list {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  .footer-links {
+    flex-direction: row;
+    gap: 8px;
   }
 }
 
-/* See more button */
-.see-more-btn {
-  margin: 10px auto 30px auto;
-  display: block;
-  background: #e50914;
-  color: white;
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  background: none;
   border: none;
-  padding: 10px 25px;
-  border-radius: 5px;
+  font-size: 24px;
+  color: white;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
 }
 
-.see-more-btn:hover {
-  background: #b00610;
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  #nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #222;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    z-index: 999;
+  }
+
+  #nav-links.show {
+    display: flex;
+  }
+
+  #nav-links a,
+  #nav-links .search-bar {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .banner {
+    height: 30vh;
+  }
+
+  .modal-body {
+    align-items: center;
+  }
+
+  .modal-body img {
+    width: 40%;
+  }
+
+  .modal-text {
+    text-align: center;
+  }
+
+  .list img {
+    width: 120px;
+  }
+
+  .search-modal input {
+    margin-top: 50px;
+    width: 90%;
+  }
+
+  .search-modal .results {
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+    overflow-x: auto;
+    padding: 10px 0;
+  }
+}
+
+@media (min-width: 769px) {
+  #nav-links {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #nav-links a,
+  #nav-links .search-bar {
+    width: auto;
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner h1 {
+    font-size: 20px;
+    padding: 5px;
+  }
+
+  .row h2 {
+    font-size: 18px;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .modal-body img {
+    width: 40%;
+  }
+
+  .search-modal .close {
+    font-size: 24px;
+    top: 10px;
+    right: 20px;
+  }
 }
