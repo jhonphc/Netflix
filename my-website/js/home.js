@@ -143,24 +143,6 @@ window.addEventListener('keydown', function (e) {
   }
 });
 
-document.addEventListener('click', function (e) {
-  const movieRow = document.querySelector('.row.movies');
-  const tvRow = document.querySelector('.row.tvshows');
-  const animeRow = document.querySelector('.row.anime');
-  const seeMoreButtons = document.querySelectorAll('.see-more-btn');
-
-  if (
-    movieRow?.contains(e.target) ||
-    tvRow?.contains(e.target) ||
-    animeRow?.contains(e.target) ||
-    Array.from(seeMoreButtons).some(btn => btn.contains(e.target))
-  ) {
-    return;
-  }
-
-  collapseAllSections();
-});
-
 function openSearchModal() {
   document.getElementById('search-modal').style.display = 'flex';
   document.getElementById('search-input').focus();
@@ -196,17 +178,35 @@ async function searchTMDB() {
   });
 }
 
-let moviePage = 1;
-let tvPage = 1;
-let animePage = 1;
-let vivamaxPage = 1;
-
 function collapseAllSections() {
   ['movies-list', 'tvshows-list', 'anime-list', 'vivamax-list'].forEach(id => {
     const container = document.getElementById(id);
     container.classList.remove('expanded');
   });
 }
+
+async function init() {
+  populateYearSelect('movie-year-select');
+  populateYearSelect('tvshow-year-select');
+  populateYearSelect('anime-year-select');
+  populateYearSelect('vivamax-year-select');
+
+  const movies = await fetchTrending('movie');
+  const tvShows = await fetchTrending('tv');
+  const anime = await fetchTrendingAnime();
+  const vivamax = await fetchVivamaxByYear('all');
+
+  displayBanner(movies[Math.floor(Math.random() * movies.length)]);
+  displayList(movies, 'movies-list');
+  displayList(tvShows, 'tvshows-list');
+  displayList(anime, 'anime-list');
+  displayList(vivamax, 'vivamax-list');
+}
+
+let moviePage = 1;
+let tvPage = 1;
+let animePage = 1;
+let vivamaxPage = 1;
 
 document.getElementById('see-more-movies').addEventListener('click', async () => {
   const year = document.getElementById('movie-year-select').value;
@@ -271,23 +271,5 @@ document.getElementById('vivamax-year-select').addEventListener('change', async 
   container.innerHTML = '';
   displayList(vivamax, 'vivamax-list');
 });
-
-async function init() {
-  populateYearSelect('movie-year-select');
-  populateYearSelect('tvshow-year-select');
-  populateYearSelect('anime-year-select');
-  populateYearSelect('vivamax-year-select');
-
-  const movies = await fetchTrending('movie');
-  const tvShows = await fetchTrending('tv');
-  const anime = await fetchTrendingAnime();
-  const vivamax = await fetchVivamaxByYear('all');
-
-  displayBanner(movies[Math.floor(Math.random() * movies.length)]);
-  displayList(movies, 'movies-list');
-  displayList(tvShows, 'tvshows-list');
-  displayList(anime, 'anime-list');
-  displayList(vivamax, 'vivamax-list');
-}
 
 init();
