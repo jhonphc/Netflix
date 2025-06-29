@@ -381,3 +381,7 @@ body {
     right: 20px;
   }
 }
+
+#vivamax-section {
+  display: none;
+}
