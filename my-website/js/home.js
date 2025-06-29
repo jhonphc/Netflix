@@ -98,7 +98,6 @@ function displayBanner(item) {
 function displayList(items, containerId) {
   const container = document.getElementById(containerId);
   container.innerHTML = '';
-  container.classList.remove('expanded'); // Reset layout
   items.forEach(item => {
     const img = document.createElement('img');
     img.src = `${IMG_URL}${item.poster_path}`;
@@ -139,11 +138,11 @@ function closeModal() {
   document.getElementById('modal-video').src = '';
 }
 
-// Search Modal
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
     closeSearchModal();
     closeModal();
+    collapseAllExpanded();
   }
 });
 
@@ -214,67 +213,49 @@ document.getElementById('anime-year-select').addEventListener('change', async (e
 
 init();
 
-// SEE MORE LOGIC
-let moviePage = 1;
-let tvPage = 1;
-let animePage = 1;
+// See More handlers
+async function handleSeeMore(type) {
+  const containerId = {
+    movie: 'movies-list',
+    tv: 'tvshows-list',
+    anime: 'anime-list'
+  }[type];
 
-async function fetchMoreMovies(page = 1) {
-  const res = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`);
-  const data = await res.json();
-  return data.results.map(item => ({ ...item, media_type: 'movie' }));
+  const yearSelectId = {
+    movie: 'movie-year-select',
+    tv: 'tvshow-year-select',
+    anime: 'anime-year-select'
+  }[type];
+
+  const year = document.getElementById(yearSelectId).value;
+
+  const data = {
+    movie: fetchMoviesByYear,
+    tv: fetchTVByYear,
+    anime: fetchAnimeByYear
+  }[type];
+
+  const items = await data(year);
+  displayList(items, containerId);
+  document.getElementById(containerId).classList.add('expanded');
 }
 
-async function fetchMoreTV(page = 1) {
-  const res = await fetch(`${BASE_URL}/tv/popular?api_key=${API_KEY}&page=${page}`);
-  const data = await res.json();
-  return data.results.map(item => ({ ...item, media_type: 'tv' }));
+document.getElementById('see-more-movies').addEventListener('click', () => handleSeeMore('movie'));
+document.getElementById('see-more-tv').addEventListener('click', () => handleSeeMore('tv'));
+document.getElementById('see-more-anime').addEventListener('click', () => handleSeeMore('anime'));
+
+// Collapse on outside click
+document.addEventListener('click', function (e) {
+  const clickedInsideList = e.target.closest('.list');
+  const clickedButton = e.target.closest('.see-more-btn');
+
+  if (!clickedInsideList && !clickedButton) {
+    collapseAllExpanded();
+  }
+});
+
+function collapseAllExpanded() {
+  ['movies-list', 'tvshows-list', 'anime-list'].forEach(id => {
+    document.getElementById(id).classList.remove('expanded');
+  });
 }
-
-async function fetchMoreAnime(page = 1) {
-  const res = await fetch(`${BASE_URL}/discover/tv?api_key=${API_KEY}&with_original_language=ja&with_genres=16&sort_by=popularity.desc&page=${page}`);
-  const data = await res.json();
-  return data.results.map(item => ({ ...item, media_type: 'tv' }));
-}
-
-document.getElementById('see-more-movies').addEventListener('click', async () => {
-  const list = document.getElementById('movies-list');
-  list.classList.add('expanded');
-  moviePage++;
-  const moreMovies = await fetchMoreMovies(moviePage);
-  moreMovies.forEach(item => {
-    const img = document.createElement('img');
-    img.src = `${IMG_URL}${item.poster_path}`;
-    img.alt = item.title || item.name;
-    img.onclick = () => showDetails(item);
-    list.appendChild(img);
-  });
-});
-
-document.getElementById('see-more-tv').addEventListener('click', async () => {
-  const list = document.getElementById('tvshows-list');
-  list.classList.add('expanded');
-  tvPage++;
-  const moreTV = await fetchMoreTV(tvPage);
-  moreTV.forEach(item => {
-    const img = document.createElement('img');
-    img.src = `${IMG_URL}${item.poster_path}`;
-    img.alt = item.title || item.name;
-    img.onclick = () => showDetails(item);
-    list.appendChild(img);
-  });
-});
-
-document.getElementById('see-more-anime').addEventListener('click', async () => {
-  const list = document.getElementById('anime-list');
-  list.classList.add('expanded');
-  animePage++;
-  const moreAnime = await fetchMoreAnime(animePage);
-  moreAnime.forEach(item => {
-    const img = document.createElement('img');
-    img.src = `${IMG_URL}${item.poster_path}`;
-    img.alt = item.title || item.name;
-    img.onclick = () => showDetails(item);
-    list.appendChild(img);
-  });
-});
