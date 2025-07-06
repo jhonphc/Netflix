@@ -2,8 +2,8 @@ const API_KEY = 'd2d985b7df3d3be9d03874d6bb4ada88';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_URL = 'https://image.tmdb.org/t/p/original';
 
-// const BASE_URL = 'https://apimocine.vercel.app/movie/';
-// const IMG_URL = 'https://apimocine.vercel.app/tv/';
+const BASE_URL = 'https://apimocine.vercel.app/movie/';
+const IMG_URL = 'https://apimocine.vercel.app/tv/';
 
 let currentItem;
 const currentYear = new Date().getFullYear();
