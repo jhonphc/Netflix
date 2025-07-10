@@ -110,31 +110,70 @@ function displayList(items, containerId) {
   });
 }
 
-function showDetails(item) {
+// function showDetails(item) {
+//   currentItem = item;
+//   document.getElementById('modal-title').textContent = item.title || item.name;
+//   document.getElementById('modal-description').textContent = item.overview;
+//   document.getElementById('modal-image').src = `${IMG_URL}${item.poster_path}`;
+//   document.getElementById('modal-rating').innerHTML = '★'.repeat(Math.round(item.vote_average / 2));
+//   changeServer();
+//   document.getElementById('modal').style.display = 'flex';
+// }
+async function showDetails(item) {
   currentItem = item;
+
+  // Get IMDb ID first
+  const type = item.media_type === "movie" ? "movie" : "tv";
+  const res = await fetch(`${BASE_URL}/${type}/${item.id}/external_ids?api_key=${API_KEY}`);
+  const ids = await res.json();
+  currentItem.imdb_id = ids.imdb_id;
+
   document.getElementById('modal-title').textContent = item.title || item.name;
   document.getElementById('modal-description').textContent = item.overview;
   document.getElementById('modal-image').src = `${IMG_URL}${item.poster_path}`;
   document.getElementById('modal-rating').innerHTML = '★'.repeat(Math.round(item.vote_average / 2));
-  changeServer();
+
+  changeServer(); // Call after imdb_id is ready
   document.getElementById('modal').style.display = 'flex';
 }
 
+
+// function changeServer() {
+//   const server = document.getElementById('server').value;
+//   const type = currentItem.media_type === "movie" ? "movie" : "tv";
+//   let embedURL = "";
+
+//   if (server === "vidsrc.cc") {
+//     embedURL = `https://vidsrc.cc/v2/embed/${type}/${currentItem.id}`;
+//   } else if (server === "vidsrc.me") {
+//     embedURL = `https://vidsrc.net/embed/${type}/?tmdb=${currentItem.id}`;
+//   } else if (server === "player.videasy.net") {
+//     embedURL = `https://player.videasy.net/${type}/${currentItem.id}`;
+//   }
+
+//   document.getElementById('modal-video').src = embedURL;
+// }
+
 function changeServer() {
   const server = document.getElementById('server').value;
-  const type = currentItem.media_type === "movie" ? "movie" : "tv";
+  const imdbID = currentItem.imdb_id;
+
   let embedURL = "";
 
-  if (server === "vidsrc.cc") {
-    embedURL = `https://vidsrc.cc/v2/embed/${type}/${currentItem.id}`;
+  if (!imdbID) {
+    embedURL = "about:blank";
+    console.warn("IMDb ID not available for this item.");
+  } else if (server === "vidsrc.cc") {
+    embedURL = `https://vidsrc.cc/embed/${imdbID}`;
   } else if (server === "vidsrc.me") {
-    embedURL = `https://vidsrc.net/embed/${type}/?tmdb=${currentItem.id}`;
+    embedURL = `https://vidsrc.me/embed/${imdbID}`;
   } else if (server === "player.videasy.net") {
-    embedURL = `https://player.videasy.net/${type}/${currentItem.id}`;
+    embedURL = `https://player.videasy.net/embed/${imdbID}`;
   }
 
   document.getElementById('modal-video').src = embedURL;
 }
+
 
 function closeModal() {
   document.getElementById('modal').style.display = 'none';
