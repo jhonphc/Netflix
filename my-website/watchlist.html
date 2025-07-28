@@ -44,6 +44,16 @@
       margin-bottom: 10px;
       cursor: pointer;
     }
+    .navbar .search-bar {
+      display: inline-block;
+      margin-left: 20px;
+    }
+    .navbar .search-bar input {
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
@@ -51,6 +61,9 @@
     <h1 class="jf"><a href="index.html">NgekFlix</a></h1>
     <div class="nav-links">
       <a href="index.html"><b>Home</b></a>
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search your watchlist...">
+      </div>
     </div>
   </div>
 
@@ -61,15 +74,16 @@
 
   <script>
     const IMG_URL = 'https://image.tmdb.org/t/p/original';
+    let fullWatchlist = [];
 
-    function renderWatchlist() {
+    function renderWatchlist(filter = '') {
       const container = document.getElementById('watchlist-container');
-      const list = JSON.parse(localStorage.getItem('watchlist') || '[]');
+      const list = fullWatchlist.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()));
 
       container.innerHTML = '';
 
       if (list.length === 0) {
-        container.innerHTML = '<p style="color:white;padding:20px">Your watchlist is empty.</p>';
+        container.innerHTML = '<p style="color:white;padding:20px">No results found.</p>';
         return;
       }
 
@@ -100,12 +114,16 @@
     }
 
     function removeFromWatchlist(id, type) {
-      let list = JSON.parse(localStorage.getItem('watchlist') || '[]');
-      list = list.filter(i => !(i.id === id && i.media_type === type));
-      localStorage.setItem('watchlist', JSON.stringify(list));
-      renderWatchlist();
+      fullWatchlist = fullWatchlist.filter(i => !(i.id === id && i.media_type === type));
+      localStorage.setItem('watchlist', JSON.stringify(fullWatchlist));
+      renderWatchlist(document.getElementById('search-input').value);
     }
 
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      renderWatchlist(e.target.value);
+    });
+
+    fullWatchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
     renderWatchlist();
   </script>
 </body>
