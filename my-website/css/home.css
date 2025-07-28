@@ -431,40 +431,5 @@ body {
 
 
 
-/* watchlist section */
 
-#watchlist-section {
-  padding: 20px;
-  background-color: #111;
-  color: white;
-}
-
-.watchlist-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.watchlist-grid img {
-  width: 150px;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: transform 0.2s ease;
-}
-
-.watchlist-grid img:hover {
-  transform: scale(1.05);
-}
-
-.remove-btn {
-  display: block;
-  margin-top: 5px;
-  background-color: crimson;
-  color: white;
-  border: none;
-  padding: 5px;
-  font-size: 12px;
-  border-radius: 4px;
-  cursor: pointer;
-}
 
