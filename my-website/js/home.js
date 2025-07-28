@@ -110,16 +110,62 @@ function displayList(items, containerId) {
   });
 }
 
-function showDetails(item) {
+
+// showDetails Start here -------
+
+// function showDetails(item) {
+//   currentItem = item;
+//   document.getElementById('modal-title').textContent = item.title || item.name;
+//   document.getElementById('modal-description').textContent = item.overview;
+//   document.getElementById('modal-image').src = `${IMG_URL}${item.poster_path}`;
+//   document.getElementById('modal-rating').innerHTML = '★'.repeat(Math.round(item.vote_average / 2));
+//   changeServer();
+//   document.getElementById('modal').style.display = 'flex';
+// }
+async function showDetails(item) {
   currentItem = item;
+  const type = item.media_type === "movie" ? "movie" : "tv";
+
+  try {
+    // Fetch IMDb ID and details
+    const [externalRes, detailsRes, creditsRes] = await Promise.all([
+      fetch(`${BASE_URL}/${type}/${item.id}/external_ids?api_key=${API_KEY}`),
+      fetch(`${BASE_URL}/${type}/${item.id}?api_key=${API_KEY}`),
+      fetch(`${BASE_URL}/${type}/${item.id}/credits?api_key=${API_KEY}`)
+    ]);
+
+    const externalData = await externalRes.json();
+    const details = await detailsRes.json();
+    const credits = await creditsRes.json();
+
+    currentItem.imdb_id = externalData.imdb_id;
+    currentItem.genres = details.genres || [];
+    currentItem.cast = credits.cast ? credits.cast.slice(0, 5) : [];
+
+  } catch (err) {
+    console.error("Error fetching extra details:", err);
+    currentItem.imdb_id = null;
+    currentItem.genres = [];
+    currentItem.cast = [];
+  }
+
+  // Modal content
   document.getElementById('modal-title').textContent = item.title || item.name;
   document.getElementById('modal-description').textContent = item.overview;
   document.getElementById('modal-image').src = `${IMG_URL}${item.poster_path}`;
   document.getElementById('modal-rating').innerHTML = '★'.repeat(Math.round(item.vote_average / 2));
-  changeServer();
+
+  // 🔹 Add genres and cast
+  const genres = currentItem.genres.map(g => g.name).join(', ');
+  const cast = currentItem.cast.map(c => c.name).join(', ');
+  document.getElementById('modal-genres').textContent = `Genres: ${genres || 'N/A'}`;
+  document.getElementById('modal-cast').textContent = `Cast: ${cast || 'N/A'}`;
+
   document.getElementById('modal').style.display = 'flex';
+  changeServer();
 }
 
+// showDetails end here --------
 
 
 
