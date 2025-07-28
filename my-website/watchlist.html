@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NgekFlix Watchlist</title>
   <link rel="stylesheet" href="css/home.css">
+  <link rel="preload" href="css/home.css" as="style">
+  <link rel="preload" href="js/home.js" as="script">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  
+  <script defer src="js/home.js"></script>
   <style>
     .video-thumbnails {
       display: grid;
@@ -61,6 +69,25 @@
   </style>
 </head>
 
+  
+
+  
+<body>
+  <div class="navbar">
+    <h1 class="jf"><a href="index.html">NgekFlix</a></h1>
+    <div class="nav-links">
+      <a href="index.html"><b>Home</b></a>
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search your watchlist...">
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <h2 style="padding: 20px; color: #fff;">My Watchlist</h2>
+    <div id="watchlist-container" class="video-thumbnails"></div>
+  </main>
+
   <!-- Modal -->
 <div class="modal" id="modal">
     <div class="modal-content">
@@ -95,23 +122,6 @@
   <input type="text" id="search-input" placeholder="Search for a movie or show..." oninput="searchTMDB()" />
   <div class="results" id="search-results"></div>
 </div>
-
-  
-<body>
-  <div class="navbar">
-    <h1 class="jf"><a href="index.html">NgekFlix</a></h1>
-    <div class="nav-links">
-      <a href="index.html"><b>Home</b></a>
-      <div class="search-bar">
-        <input type="text" id="search-input" placeholder="Search your watchlist...">
-      </div>
-    </div>
-  </div>
-
-  <main>
-    <h2 style="padding: 20px; color: #fff;">My Watchlist</h2>
-    <div id="watchlist-container" class="video-thumbnails"></div>
-  </main>
 
   <script>
     const IMG_URL = 'https://image.tmdb.org/t/p/original';
