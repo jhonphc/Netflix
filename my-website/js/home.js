@@ -234,49 +234,6 @@ function toggleWatchlist() {
 // end --------------------------------
 
 
-function renderWatchlist() {
-  const container = document.getElementById('watchlist-container');
-  const list = JSON.parse(localStorage.getItem('watchlist') || '[]');
-
-  container.innerHTML = '';
-
-  if (list.length === 0) {
-    container.innerHTML = '<p>Your watchlist is empty.</p>';
-    return;
-  }
-
-  list.forEach(item => {
-    const wrapper = document.createElement('div');
-
-    const img = document.createElement('img');
-    img.src = `${IMG_URL}${item.poster_path}`;
-    img.alt = item.title;
-    img.onclick = async () => {
-      const type = item.media_type;
-      const res = await fetch(`${BASE_URL}/${type}/${item.id}?api_key=${API_KEY}`);
-      const data = await res.json();
-      data.media_type = type;
-      showDetails(data);
-    };
-
-    const removeBtn = document.createElement('button');
-    removeBtn.className = 'remove-btn';
-    removeBtn.textContent = 'Remove';
-    removeBtn.onclick = () => removeFromWatchlist(item.id, item.media_type);
-
-    wrapper.appendChild(img);
-    wrapper.appendChild(removeBtn);
-    container.appendChild(wrapper);
-  });
-}
-
-function removeFromWatchlist(id, type) {
-  let list = JSON.parse(localStorage.getItem('watchlist') || '[]');
-  list = list.filter(i => !(i.id === id && i.media_type === type));
-  localStorage.setItem('watchlist', JSON.stringify(list));
-  renderWatchlist();
-}
-
 
 
 
@@ -425,8 +382,6 @@ document.getElementById('vivamax-year-select').addEventListener('change', async 
   const container = document.getElementById('vivamax-list');
   container.innerHTML = '';
   displayList(vivamax, 'vivamax-list');
-  
-  renderWatchlist();
 });
 
 init();
