@@ -56,51 +56,44 @@
     }
 
 
-    
 
-    .modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.9);
-}
-.modal-content {
-  background-color: #111;
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 90%;
-  max-width: 800px;
-  color: white;
-  text-align: center;
-}
-.modal-content iframe {
-  width: 100%;
-  height: auto;
-  max-height: 70vh;
-  margin-top: 10px;
-}
-.close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
 
   </style>
 </head>
 
   <!-- Modal -->
-<div class="modal" id="video-modal">
-  <div class="modal-content">
-    <span class="close" id="close-modal">&times;</span>
+<div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()" style="color: red;">&times;</span>
+      <div class="modal-body">
+  <img id="modal-image" src="" alt="" />
+  <div class="modal-text">
     <h2 id="modal-title"></h2>
-    <iframe id="modal-source" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+    <div class="stars" id="modal-rating"></div>
+    <p id="modal-description"></p>
+    <p id="modal-genres" style="margin-top: 20px;"></p>
+    <p id="modal-cast" style="margin-top: 20px;"></p>
   </div>
+
+        
+</div>
+      
+      <div class="server-selector">
+        <label for="server">Change Server:</label>
+        <select id="server" onchange="changeServer()">
+          <option value="vidsrc.cc">Vidsrc.cc</option>
+          <option value="vidsrc.me">Vidsrc.me</option>
+          <option value="player.videasy.net">Player.Videasy.net</option>
+        </select>
+      </div>
+      <iframe id="modal-video" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="search-modal" id="search-modal">
+  <span class="close" onclick="closeSearchModal()" style="color: red;">&times;</span>
+  <input type="text" id="search-input" placeholder="Search for a movie or show..." oninput="searchTMDB()" />
+  <div class="results" id="search-results"></div>
 </div>
 
   
@@ -142,8 +135,8 @@
         const img = document.createElement('img');
         img.src = `${IMG_URL}${item.poster_path}`;
         img.alt = item.title;
-        img.onclick = () => {
-          window.location.href = `index.html#${item.id}-${item.media_type}`;
+        img.onclick = () => showDetails(item);
+    container.appendChild(img);
         };
 
         const title = document.createElement('h2');
