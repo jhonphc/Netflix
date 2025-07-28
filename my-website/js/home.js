@@ -167,7 +167,7 @@ async function showDetails(item) {
 
 // showDetails end here --------
 
-
+// Server section -------
 
 function changeServer() {
   const server = document.getElementById('server').value;
@@ -203,6 +203,88 @@ window.addEventListener('keydown', function (e) {
     collapseAllSections();
   }
 });
+
+
+
+// watchlist button fuction --------
+
+function toggleWatchlist() {
+  const watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
+
+  const exists = watchlist.find(
+    i => i.id === currentItem.id && i.media_type === currentItem.media_type
+  );
+
+  if (exists) {
+    alert("Already in your watchlist!");
+    return;
+  }
+
+  watchlist.push({
+    id: currentItem.id,
+    title: currentItem.title || currentItem.name,
+    media_type: currentItem.media_type,
+    poster_path: currentItem.poster_path
+  });
+
+  localStorage.setItem('watchlist', JSON.stringify(watchlist));
+  alert("Added to watchlist!");
+}
+
+// end --------------------------------
+
+
+function renderWatchlist() {
+  const container = document.getElementById('watchlist-container');
+  const list = JSON.parse(localStorage.getItem('watchlist') || '[]');
+
+  container.innerHTML = '';
+
+  if (list.length === 0) {
+    container.innerHTML = '<p>Your watchlist is empty.</p>';
+    return;
+  }
+
+  list.forEach(item => {
+    const wrapper = document.createElement('div');
+
+    const img = document.createElement('img');
+    img.src = `${IMG_URL}${item.poster_path}`;
+    img.alt = item.title;
+    img.onclick = async () => {
+      const type = item.media_type;
+      const res = await fetch(`${BASE_URL}/${type}/${item.id}?api_key=${API_KEY}`);
+      const data = await res.json();
+      data.media_type = type;
+      showDetails(data);
+    };
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-btn';
+    removeBtn.textContent = 'Remove';
+    removeBtn.onclick = () => removeFromWatchlist(item.id, item.media_type);
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(removeBtn);
+    container.appendChild(wrapper);
+  });
+}
+
+function removeFromWatchlist(id, type) {
+  let list = JSON.parse(localStorage.getItem('watchlist') || '[]');
+  list = list.filter(i => !(i.id === id && i.media_type === type));
+  localStorage.setItem('watchlist', JSON.stringify(list));
+  renderWatchlist();
+}
+
+
+
+
+
+
+
+
+
 
 document.addEventListener('click', function (e) {
   const allowed = [
@@ -343,6 +425,8 @@ document.getElementById('vivamax-year-select').addEventListener('change', async 
   const container = document.getElementById('vivamax-list');
   container.innerHTML = '';
   displayList(vivamax, 'vivamax-list');
+  
+  renderWatchlist();
 });
 
 init();
