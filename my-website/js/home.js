@@ -159,8 +159,20 @@ async function showDetails(item) {
   const genres = currentItem.genres.map(g => g.name).join(', ');
   const cast = currentItem.cast.map(c => c.name).join(', ');
   document.getElementById('modal-genres').textContent = `Genres: ${genres || 'N/A'}`;
-  document.getElementById('modal-cast').textContent = `Cast: ${cast || 'N/A'}`;
+  // document.getElementById('modal-cast').textContent = `Cast: ${cast || 'N/A'}`;
+  
+  const castHTML = item.cast?.map(c => `
+  <div class="cast-member">
+    <img src="${c.profile_path ? IMG_URL + c.profile_path : 'https://via.placeholder.com/100x100?text=No+Image'}" alt="${c.name}">
+    <span><strong>${c.name}</strong></span>
+    <span class="character">${c.character || ''}</span>
+  </div>
+`).join('') || '<p>No cast available.</p>';
 
+document.getElementById('modal-cast').innerHTML = `<div class="cast-container">${castHTML}</div>`;
+
+
+  
   document.getElementById('modal').style.display = 'flex';
   changeServer();
 }
