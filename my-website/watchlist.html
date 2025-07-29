@@ -198,7 +198,16 @@
       document.getElementById('modal-image').src = `${IMG_URL}${item.poster_path}`;
       document.getElementById('modal-rating').innerHTML = '★'.repeat(Math.round((item.vote_average || 0) / 2));
       document.getElementById('modal-genres').textContent = 'Genres: ' + (item.genres.map(g => g.name).join(', ') || 'N/A');
-      document.getElementById('modal-cast').textContent = 'Cast: ' + (item.cast.map(c => c.name).join(', ') || 'N/A');
+      // document.getElementById('modal-cast').textContent = 'Cast: ' + (item.cast.map(c => c.name).join(', ') || 'N/A');
+      const castHTML = item.cast?.map(c => `
+  <div class="cast-member">
+    <img src="${c.profile_path ? IMG_URL + c.profile_path : 'https://via.placeholder.com/100x100?text=No+Image'}" alt="${c.name}">
+    <span>${c.name}</span>
+  </div>
+`).join('') || '<p>No cast available.</p>';
+
+document.getElementById('modal-cast').innerHTML = `<div class="cast-container">${castHTML}</div>`;
+
     }
 
     function closeModal() {
