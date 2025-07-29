@@ -220,36 +220,7 @@ document.getElementById('modal-cast').innerHTML = `<div class="cast-container">$
     });
 
     // ==== CHANGE SERVER ====
-    // function changeServer() {
-    //   if (!currentItem) return;
-    //   const server = document.getElementById('server').value;
-    //   const type = currentItem.media_type === 'movie' ? 'movie' : 'tv';
-    //   const tmdbID = currentItem.id;
-    //   const imdbID = currentItem.imdb_id;
-    //   let embedURL = '';
-
-    //   if (server === 'vidsrc.cc') {
-    //     // works with TMDB id
-    //     embedURL = `https://vidsrc.cc/v2/embed/${type}/${tmdbID}`;
-    //   } else if (server === 'vidsrc.me') {
-    //     if (!imdbID) {
-    //       alert('IMDb ID not available. Please switch servers.');
-    //       document.getElementById('modal-video').src = '';
-    //       return;
-    //     }
-    //     embedURL = `https://vidsrc.me/embed/${imdbID}`;
-    //   } else if (server === 'player.videasy.net') {
-    //     if (!imdbID) {
-    //       alert('IMDb ID not available. Please switch servers.');
-    //       document.getElementById('modal-video').src = '';
-    //       return;
-    //     }
-    //     embedURL = `https://player.videasy.net/embed/${imdbID}`;
-    //   }
-
-    //   document.getElementById('modal-video').src = embedURL;
-    // }
-
+  
     function changeServer() {
   const server = document.getElementById('server').value;
   const type = currentItem.media_type === "movie" ? "movie" : "tv";
