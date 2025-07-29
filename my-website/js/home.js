@@ -164,12 +164,12 @@ async function showDetails(item) {
   const castHTML = item.cast?.map(c => `
   <div class="cast-member">
     <img src="${c.profile_path ? IMG_URL + c.profile_path : 'https://via.placeholder.com/100x100?text=No+Image'}" alt="${c.name}">
-    <span><strong>${c.name}</strong></span>
-    <span class="character">${c.character || ''}</span>
+    <span>${c.name}</span>
   </div>
 `).join('') || '<p>No cast available.</p>';
 
 document.getElementById('modal-cast').innerHTML = `<div class="cast-container">${castHTML}</div>`;
+
 
 
   
