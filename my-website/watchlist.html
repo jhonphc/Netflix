@@ -162,55 +162,55 @@
     });
 
     // ==== OPEN MODAL FROM WATCHLIST ====
-    // async function openFromWatchlist(savedItem) {
-    //   const type = savedItem.media_type === 'movie' ? 'movie' : 'tv';
-    //   try {
-    //     const [externalRes, detailsRes, creditsRes] = await Promise.all([
-    //       fetch(`${BASE_URL}/${type}/${savedItem.id}/external_ids?api_key=${API_KEY}`),
-    //       fetch(`${BASE_URL}/${type}/${savedItem.id}?api_key=${API_KEY}`),
-    //       fetch(`${BASE_URL}/${type}/${savedItem.id}/credits?api_key=${API_KEY}`)
-    //     ]);
+    async function openFromWatchlist(savedItem) {
+      const type = savedItem.media_type === 'movie' ? 'movie' : 'tv';
+      try {
+        const [externalRes, detailsRes, creditsRes] = await Promise.all([
+          fetch(`${BASE_URL}/${type}/${savedItem.id}/external_ids?api_key=${API_KEY}`),
+          fetch(`${BASE_URL}/${type}/${savedItem.id}?api_key=${API_KEY}`),
+          fetch(`${BASE_URL}/${type}/${savedItem.id}/credits?api_key=${API_KEY}`)
+        ]);
 
-    //     const externalData = await externalRes.json();
-    //     const details = await detailsRes.json();
-    //     const credits = await creditsRes.json();
+        const externalData = await externalRes.json();
+        const details = await detailsRes.json();
+        const credits = await creditsRes.json();
 
-    //     currentItem = {
-    //       ...details,
-    //       media_type: type,
-    //       imdb_id: externalData.imdb_id,
-    //       genres: details.genres || [],
-    //       cast: (credits.cast || []).slice(0,5)
-    //     };
+        currentItem = {
+          ...details,
+          media_type: type,
+          imdb_id: externalData.imdb_id,
+          genres: details.genres || [],
+          cast: (credits.cast || []).slice(0,5)
+        };
 
-    //     populateModal(currentItem);
-    //     changeServer();
-    //     document.getElementById('modal').style.display = 'flex';
-    //   } catch (e) {
-    //     console.error(e);
-    //     alert('Failed to load this item.');
-    //   }
-    // }
+        populateModal(currentItem);
+        changeServer();
+        document.getElementById('modal').style.display = 'flex';
+      } catch (e) {
+        console.error(e);
+        alert('Failed to load this item.');
+      }
+    }
 
-    // function populateModal(item) {
-    //   document.getElementById('modal-title').textContent = item.title || item.name;
-    //   document.getElementById('modal-description').textContent = item.overview || '';
-    //   document.getElementById('modal-image').src = `${IMG_URL}${item.poster_path}`;
-    //   document.getElementById('modal-rating').innerHTML = '★'.repeat(Math.round((item.vote_average || 0) / 2));
-    //   document.getElementById('modal-genres').textContent = 'Genres: ' + (item.genres.map(g => g.name).join(', ') || 'N/A');
-    //   document.getElementById('modal-cast').textContent = 'Cast: ' + (item.cast.map(c => c.name).join(', ') || 'N/A');
-    // }
+    function populateModal(item) {
+      document.getElementById('modal-title').textContent = item.title || item.name;
+      document.getElementById('modal-description').textContent = item.overview || '';
+      document.getElementById('modal-image').src = `${IMG_URL}${item.poster_path}`;
+      document.getElementById('modal-rating').innerHTML = '★'.repeat(Math.round((item.vote_average || 0) / 2));
+      document.getElementById('modal-genres').textContent = 'Genres: ' + (item.genres.map(g => g.name).join(', ') || 'N/A');
+      document.getElementById('modal-cast').textContent = 'Cast: ' + (item.cast.map(c => c.name).join(', ') || 'N/A');
+    }
 
-    // function closeModal() {
-    //   document.getElementById('modal').style.display = 'none';
-    //   document.getElementById('modal-video').src = '';
-    // }
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+      document.getElementById('modal-video').src = '';
+    }
 
-    // window.addEventListener('keydown', (e) => {
-    //   if (e.key === 'Escape') closeModal();
-    // });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
 
-    // // ==== CHANGE SERVER ====
+    // ==== CHANGE SERVER ====
     // function changeServer() {
     //   if (!currentItem) return;
     //   const server = document.getElementById('server').value;
@@ -240,6 +240,22 @@
 
     //   document.getElementById('modal-video').src = embedURL;
     // }
+
+    function changeServer() {
+  const server = document.getElementById('server').value;
+  const type = currentItem.media_type === "movie" ? "movie" : "tv";
+  let embedURL = "";
+
+  if (server === "vidsrc.cc") {
+    embedURL = `https://vidsrc.cc/v2/embed/${type}/${currentItem.id}`;
+  } else if (server === "vidsrc.me") {
+    embedURL = `https://vidsrc.net/embed/${type}/?tmdb=${currentItem.id}`;
+  } else if (server === "player.videasy.net") {
+    embedURL = `https://player.videasy.net/${type}/${currentItem.id}`;
+  }
+
+  document.getElementById('modal-video').src = embedURL;
+}
 
     // ==== INIT ====
     fullWatchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
