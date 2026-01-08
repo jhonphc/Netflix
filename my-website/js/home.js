@@ -5,6 +5,32 @@ const IMG_URL = 'https://image.tmdb.org/t/p/original';
 // const BASE_URL = 'https://apimocine.vercel.app/movie/';
 // const IMG_URL = 'https://apimocine.vercel.app/tv/';
 
+
+// ==================== Click-Shield Logic ====================
+let playerUnlocked = false;
+
+function resetClickShield() {
+  const shield = document.getElementById('clickShield');
+  if (shield) {
+    shield.classList.remove('hidden');
+    playerUnlocked = false;
+  }
+}
+
+// When user clicks the shield, unlock player
+document.addEventListener('click', (e) => {
+  const shield = document.getElementById('clickShield');
+  if (!shield || playerUnlocked) return;
+
+  if (shield.contains(e.target)) {
+    shield.classList.add('hidden');
+    playerUnlocked = true;
+  }
+});
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+
+
 let currentItem;
 const currentYear = new Date().getFullYear();
 
@@ -165,6 +191,11 @@ document.getElementById('modal-cast').innerHTML = `<div class="cast-container">$
 
   
   document.getElementById('modal').style.display = 'flex';
+
+  document.getElementById('modal').style.display = 'flex';
+resetClickShield(); // ✅ Reset shield every time modal opens
+
+  
   changeServer();
 }
 
@@ -404,4 +435,18 @@ document.addEventListener('DOMContentLoaded', () => {
     vivamaxSection.scrollIntoView({ behavior: 'smooth' });
   });
 });
+
+
+
+// Prevent auto-redirects immediately after returning to tab
+window.addEventListener('focus', () => {
+  const iframe = document.getElementById('modal-video');
+  if (!iframe) return;
+
+  iframe.style.pointerEvents = 'none';
+  setTimeout(() => {
+    iframe.style.pointerEvents = 'auto';
+  }, 700);
+});
+
 
