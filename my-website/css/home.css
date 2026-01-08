@@ -457,3 +457,45 @@ body {
 }
 
 
+/* New Modification for new modal */
+/* === PLAYER CLICK SHIELD === */
+.player-wrapper {
+  position: relative;
+  width: 100%;
+  height: 315px;
+  background: #000;
+  overflow: hidden;
+}
+
+.click-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.click-shield .shield-inner {
+  text-align: center;
+  color: #fff;
+}
+
+.click-shield i {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.click-shield span {
+  display: block;
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+.click-shield.hidden {
+  display: none;
+}
+
+
