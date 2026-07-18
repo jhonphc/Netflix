@@ -208,8 +208,8 @@ function changeServer() {
   const type = currentItem.media_type === "movie" ? "movie" : "tv";
   let embedURL = "";
 
-  if (server === "vidsrc.cc") {
-    embedURL = `https://vidsrc.cc/v2/embed/${type}/${currentItem.id}`;
+  if (server === "vidsrc.net") {
+    embedURL = `https://vidsrc.net/v2/embed/${type}/${currentItem.id}`;
   } else if (server === "vidsrc.me") {
     embedURL = `https://vidsrc.net/embed/${type}/?tmdb=${currentItem.id}`;
   } else if (server === "player.videasy.net") {
